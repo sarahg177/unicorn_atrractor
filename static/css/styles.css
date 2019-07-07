@@ -1,0 +1,11 @@
+main {
+    background-image: url('../images/electric_background.jpeg');
+    background-size: cover;
+    height: 90vh;
+    color: #fafafa;
+}
+
+.unicorn_logo {
+    height: 35px;
+}
+
