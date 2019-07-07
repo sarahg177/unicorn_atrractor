@@ -21,10 +21,10 @@
 
     <nav>
     <div class="nav-wrapper">
-      <a href="#" class="brand-logo">Unicorn Issue Tracker <img class="unicorn_logo" src="{% static 'images/unicorn_dab.jpeg' %}" alt="Unicorn Logo"></a>
+      <a href="{% url 'welcome' %}" class="brand-logo">Unicorn Issue Tracker <img class="unicorn_logo" src="{% static 'images/unicorn_dab.jpeg' %}" alt="Unicorn Logo"></a>
       <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="#">Home</a></li>
+        <li><a href="{% url 'welcome' %}">Home</a></li>
         <li><a href="#">Bugs</a></li>
         <li><a href="#">Features</a></li>
         {% if user.is_authenticated %}
@@ -37,16 +37,16 @@
         {% endif %}
       </ul>
       <ul class="side-nav" id="mobile-demo">
-        <li><a href="#">Home</a></li>
+        <li><a href="{% url 'welcome' %}">Home</a></li>
         <li><a href="#">Bugs</a></li>
         <li><a href="#">Features</a></li>
         {% if user.is_authenticated %}
         <li><a href="#">Graphs</a></li>
         <li><a href="#">Blog</a></li>
-        <li><a href="#">Logout</a></li>
+        <li><a href="{% url 'users_logout' %}'">Logout</a></li>
         {% else %}
-        <li><a href="#">Login</a></li>
-        <li><a href="#">Register</a></li>
+        <li><a href="{%  url 'users_login' %}">Login</a></li>
+        <li><a href="{% url 'users_register' %}">Register</a></li>
         {% endif %}
       </ul>
     </div>
