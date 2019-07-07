@@ -1,0 +1,74 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/1ee6dde756.js"></script>
+
+<!-- Custom CSS -->
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css">
+
+    <title>{% block page_title %}{% endblock %}</title>
+</head>
+<body>
+
+    <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Unicorn Issue Tracker <img class="unicorn_logo" src="{% static 'images/unicorn_dab.jpeg' %}" alt="Unicorn Logo"></img></a>
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Bugs</a></li>
+        <li><a href="#">Features</a></li>
+        {% if user.is_authenticated %}
+        <li><a href="#">Graphs</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="{%  url 'users_logout' %}">Logout</a></li>
+        {% else %}
+        <li><a href="{%  url 'users_login' %}">Login</a></li>
+        <li><a href="{%  url 'users_register' %}">Register</a></li>
+        {% endif %}
+      </ul>
+      <ul class="side-nav" id="mobile-demo">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Bugs</a></li>
+        <li><a href="#">Features</a></li>
+        {% if user.is_authenticated %}
+        <li><a href="#">Graphs</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Logout</a></li>
+        {% else %}
+        <li><a href="#">Login</a></li>
+        <li><a href="#">Register</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+<main>
+    <h1 class="page_heading">{% block page_heading %}{% endblock %}</h1>
+    {% if messages %}
+    <div>
+      {% for message in messages %} {{ message }} {% endfor %}
+    </div>
+    {% endif %}
+
+    <div>
+      {% block content %} {% endblock %}
+    </div>
+  </main>
+  <footer class="page-footer">
+    <div class="footer-copyright">
+      <div class="container">
+        &copy;2019 Unicorn
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
