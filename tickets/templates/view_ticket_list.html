@@ -35,7 +35,7 @@
                         <p> <!--<span class="badge">Votes: {{ bug.upvotes }}</span>-->{{ bug.description }}</p>
                     </div>
                     <div class="card-action">
-                        <a href="{% url 'bug_details' bug.id %}">View Details</a>
+                        <a href="#">View Details</a>
                         <a href="#">Vote</a>
                         {% if username == user %}
                             <form method="GET" action="edit/{{ bug.id }}">
