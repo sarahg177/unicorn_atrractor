@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import Bug, Vote, Comments
+from tickets.models import Ticket, Vote, Comments
 
 # Register your models here.
-admin.site.register(Bug)
+admin.site.register(Ticket)
 admin.site.register(Vote)
 admin.site.register(Comments)

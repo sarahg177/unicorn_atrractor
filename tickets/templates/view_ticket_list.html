@@ -1,10 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block page_title %}Bugs Page{% endblock %}
+{% block page_heading %}<i class="fas fa-bug"></i>Current List of Bug Tickets{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+    <div class="container">
+        <a class="waves-effect waves-light btn" href="add"><i class="material-icons">add</i>Add</a>
+    {% else %}
+        <p>Please <a href="{% url 'users_login' %}">login</a>or <a href="{% url 'users_register' %}">register</a> here to add a new bug or vote for existing bugs</p>
+    {% endif %}
 
-</body>
-</html>
+    {% for bug in bugs %}
+        <div class="row">
+            <div class="col s12 m6">
+                <div class="card white">
+                    <div class="card-content blue-grey-text">
+                        <div class="date">
+                            {{ bug.created_date }}
+                            by
+                            <i>{{ bug.username }}</i>
+                            {% ifequal bug.ticket_status "Todo" %}
+                                <span class="badge red">Todo</span>
+                            {% endifequal %}
+                            {% ifequal bug.ticket_status "Doing" %}
+                                <span class="badge yellow">Doing</span>
+                            {% endifequal %}
+                            {% ifequal bug.ticket_status "Done" %}
+                                <span class="badge green">Done</span>
+                            {% endifequal %}
+                        </div>
+                        <span class="card-title"></span>
+
+                        <span>{{ bug.title }}</span>
+                        <span class="badge"> Views: {{ bug.views }} </span>
+                        <p> <!--<span class="badge">Votes: {{ bug.upvotes }}</span>-->{{ bug.description }}</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="{% url 'bug_details' bug.id %}">View Details</a>
+                        <a href="#">Vote</a>
+                        {% if username == user %}
+                            <form method="GET" action="edit/{{ bug.id }}">
+                                <input type="submit" value="Edit">
+                            </form>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    <a class="waves-effect waves-light btn"><i class="material-icons right">network_check</i>View Graphs</a> {% endblock %}
+</div>
