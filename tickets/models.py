@@ -5,6 +5,12 @@ from django.utils import timezone
 
 class Ticket(models.Model):
     """Choices"""
+    Bug = 'Bug'
+    Feature = 'Feature'
+    Todo = 'Todo'
+    Doing = 'Doing'
+    Done = 'Done'
+
     ISSUE_TYPE = [
         ('Bug', 'Bug'),
         ('Feature', 'Feature'),
