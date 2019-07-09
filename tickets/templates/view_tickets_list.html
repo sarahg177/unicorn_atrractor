@@ -6,7 +6,7 @@
     <div class="container">
         <a class="waves-effect waves-light btn" href="add"><i class="material-icons">add</i>Add</a>
     {% else %}
-        <p>Please <a href="{% url 'users_login' %}">login</a>or <a href="{% url 'users_register' %}">register</a> here to add a new bug or vote for existing bugs</p>
+        <p>Please <a href="{% url 'login' %}">login</a>or <a href="{% url 'register' %}">register</a> here to add a new bug or vote for existing bugs</p>
     {% endif %}
 
     {% for bug in bugs %}
