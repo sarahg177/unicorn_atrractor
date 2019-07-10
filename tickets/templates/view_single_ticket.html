@@ -1,10 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block page_title %}Bug Details{% endblock %}
+{% block page_heading %}<i class="fas fa-bug"></i>Bug Ticket Details{% endblock %}
 
-</body>
-</html>
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <div class="card white">
+                <div class="card-content blue-grey-text">
+
+                    <div class="date">
+                        {{ bug.created_date }} by
+                        <i>{{ bug.username }}</i> {% ifequal bug.ticket_status "Todo" %}
+                        <span class="badge red">Todo</span> {% endifequal %} {% ifequal bug.ticket_status "Doing" %}
+                        <span class="badge yellow">Doing</span> {% endifequal %} {% ifequal bug.ticket_status "Done" %}
+                        <span class="badge green">Done</span> {% endifequal %}
+                    </div>
+                    <h3>{{ bug.title }}</h3>
+                    <div class="row">
+                        <div class="col s9">
+                            <p>{{ bug.description }}</p>
+                            <p><span class="badge">Views: {{ bug.views }}</span> </p>
+                            <!--<p><span class="badge">Votes:</span> {{ bug.upvotes }}</p>-->
+                            <a href="#" class="btn btn-default">Back</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card white">
+        <div class="card-content blue-grey-text">
+            <div class="row">
+                <div class="col s12">
+                    <div class="comments">
+                        <p>Comments:</p>
+                        {% for comment in comments %}
+                        <h3><strong>{{ comment.user }}</strong><span>commented on (( comment.date_created }}</span></h3>
+                        <p>{{ comment.comment }}</p>
+                    </div>
+                </div>
+            </div>
+                            </div>
+        <div class="card-action">
+
+            <a href="#">Vote</a>
+        </div>
+
+
+        {% endfor %}
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

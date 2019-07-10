@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
-{% block page_title %}Bugs Page{% endblock %}
-{% block page_heading %}<i class="fas fa-bug"></i>Current List of Bug Tickets{% endblock %}
+{% block page_title %}Tickets Page{% endblock %}
+{% block page_heading %}<i class="fas fa-bug"></i> Current List of Bug Tickets{% endblock %}
 {% block content %}
 {% if user.is_authenticated %}
     <div class="container">
-        <a class="waves-effect waves-light btn" href="add"><i class="material-icons">add</i>Add</a>
+        <a class="waves-effect waves-light btn" href="add"><i class="material-icons">add</i>Create New Ticket</a>
     {% else %}
-        <p>Please <a href="{% url 'login' %}">login</a>or <a href="{% url 'register' %}">register</a> here to add a new bug or vote for existing bugs</p>
+        <p>Please <a href="{% url 'login' %}">login</a>or <a href="{% url 'register' %}">register</a> here to add a new ticket or vote for existing tickets</p>
     {% endif %}
 
     {% for bug in bugs %}
@@ -35,7 +35,7 @@
                         <p> <!--<span class="badge">Votes: {{ bug.upvotes }}</span>-->{{ bug.description }}</p>
                     </div>
                     <div class="card-action">
-                        <a href="#">View Details</a>
+                        <a href="{% url 'single_view' %}">View Details</a>
                         <a href="#">Vote</a>
                         {% if username == user %}
                             <form method="GET" action="edit/{{ bug.id }}">
@@ -47,5 +47,47 @@
             </div>
         </div>
     {% endfor %}
+
+    <h1><i class="fab fa-medapps"></i> Current List of Feature Tickets</h1>
+
+    {% for feature in features %}
+        <div class="row">
+            <div class="col s12 m6">
+                <div class="card white">
+                    <div class="card-content blue-grey-text">
+                        <div class="date">
+                            {{ feature.created_date }}
+                            by
+                            <i>{{ feature.username }}</i>
+                            {% ifequal feature.ticket_status "Todo" %}
+                                <span class="badge red">Todo</span>
+                            {% endifequal %}
+                            {% ifequal feature.ticket_status "Doing" %}
+                                <span class="badge yellow">Doing</span>
+                            {% endifequal %}
+                            {% ifequal feature.ticket_status "Done" %}
+                                <span class="badge green">Done</span>
+                            {% endifequal %}
+                        </div>
+                        <span class="card-title"></span>
+
+                        <span>{{ feature.title }}</span>
+                        <span class="badge"> Views: {{ bug.views }} </span>
+                        <p> <!--<span class="badge">Votes: {{ feature.upvotes }}</span>-->{{ feature.description }}</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="{% url 'single_view' %}">View Details</a>
+                        <a href="#">Vote</a>
+                        {% if username == user %}
+                            <form method="GET" action="edit/{{ bug.id }}">
+                                <input type="submit" value="Edit">
+                            </form>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
     <a class="waves-effect waves-light btn"><i class="material-icons right">network_check</i>View Graphs</a> {% endblock %}
 </div>

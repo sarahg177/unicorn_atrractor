@@ -25,8 +25,7 @@
       <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down">
         <li><a href="{% url 'welcome' %}">Home</a></li>
-        <li><a href="#">Bugs</a></li>
-        <li><a href="#">Features</a></li>
+        <li><a href="{% url 'ticket_list' %}">Features</a></li>
         {% if user.is_authenticated %}
         <li><a href="#">Graphs</a></li>
         <li><a href="#">Blog</a></li>
@@ -38,7 +37,7 @@
       </ul>
       <ul class="side-nav" id="mobile-demo">
         <li><a href="{% url 'welcome' %}">Home</a></li>
-        <li><a href="#">Bugs</a></li>
+        <li><a href="{% url 'ticket_list' %}">Features</a></li>
         <li><a href="#">Features</a></li>
         {% if user.is_authenticated %}
         <li><a href="#">Graphs</a></li>
