@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block page_title %}Bug Details{% endblock %}
-{% block page_heading %}<i class="fas fa-bug"></i>Bug Ticket Details{% endblock %}
+
+{% block page_heading %}<i class="fas fa-bolt"> Ticket Details</i>{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -10,18 +11,18 @@
                 <div class="card-content blue-grey-text">
 
                     <div class="date">
-                        {{ bug.created_date }} by
-                        <i>{{ bug.username }}</i> {% ifequal bug.ticket_status "Todo" %}
-                        <span class="badge red">Todo</span> {% endifequal %} {% ifequal bug.ticket_status "Doing" %}
-                        <span class="badge yellow">Doing</span> {% endifequal %} {% ifequal bug.ticket_status "Done" %}
+                        {{ ticket.created_date }} by
+                        <i>{{ ticket.username }}</i> {% ifequal ticket.ticket_status "Todo" %}
+                        <span class="badge red">Todo</span> {% endifequal %} {% ifequal ticket.ticket_status "Doing" %}
+                        <span class="badge yellow">Doing</span> {% endifequal %} {% ifequal ticket.ticket_status "Done" %}
                         <span class="badge green">Done</span> {% endifequal %}
                     </div>
-                    <h3>{{ bug.title }}</h3>
+                    <h3>{{ ticket.title }}</h3>
                     <div class="row">
                         <div class="col s9">
-                            <p>{{ bug.description }}</p>
-                            <p><span class="badge">Views: {{ bug.views }}</span> </p>
-                            <!--<p><span class="badge">Votes:</span> {{ bug.upvotes }}</p>-->
+                            <p>{{ ticket.description }}</p>
+                            <p><span class="badge">Views: {{ ticket.views }}</span> </p>
+                            <!--<p><span class="badge">Votes:</span> {{ ticket.upvotes }}</p>-->
                             <a href="#" class="btn btn-default">Back</a>
                         </div>
                     </div>
