@@ -4,7 +4,7 @@
 {% block content %}
 {% if user.is_authenticated %}
     <div class="container">
-        <a class="waves-effect waves-light btn" href="add"><i class="material-icons">add</i>Create New Ticket</a>
+        <a class="waves-effect waves-light btn" href="{% url 'create_ticket' %}"><i class="material-icons">add</i>Create New Ticket</a>
     {% else %}
         <p>Please <a href="{% url 'login' %}">login</a>or <a href="{% url 'register' %}">register</a> here to add a new ticket or vote for existing tickets</p>
     {% endif %}

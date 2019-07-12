@@ -1,5 +1,5 @@
 from django import forms
-from tickets.models import Ticket, Comments
+from .models import Ticket
 
 
 class TicketForm(forms.ModelForm):
@@ -8,12 +8,11 @@ class TicketForm(forms.ModelForm):
         fields = ('issue_type', 'title', 'description')
 
 
-class CommentForm(forms.ModelForm):
+class CommentForm(forms.Form):
     comment = forms.CharField(
-        widget=forms.Textarea(
-            attrs={'rows': '10', 'cols': '5'})
-    )
+        widget=forms.Textarea,
+        required=True)
 
-    class Meta:
-        model = Comments
-        fields = ['comment']
+   # class Meta:
+    #    model = Comments
+     #   fields = ['comment']

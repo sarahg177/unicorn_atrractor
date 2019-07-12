@@ -9,3 +9,7 @@ main {
     height: 35px;
 }
 
+.post-form textarea, .post-form input {
+  width: 100%;
+}
+

@@ -63,3 +63,6 @@ class Comments(models.Model):
     ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE)
     date_commented = models.DateTimeField(default=timezone.now)
     comment = models.CharField(max_length=1000, blank=False)
+
+    def __str__(self):
+        return self.comment
