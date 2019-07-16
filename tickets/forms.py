@@ -12,7 +12,3 @@ class CommentForm(forms.Form):
     comment = forms.CharField(
         widget=forms.Textarea,
         required=True)
-
-   # class Meta:
-    #    model = Comments
-     #   fields = ['comment']

@@ -2,9 +2,9 @@
 {% block page_title %}Tickets Page{% endblock %}
 {% block page_heading %}<i class="fas fa-bug"></i> Current List of Bug Tickets{% endblock %}
 {% block content %}
-{% if user.is_authenticated %}
-    <div class="container">
-        <a class="waves-effect waves-light btn" href="{% url 'create_ticket' %}"><i class="material-icons">add</i>Create New Ticket</a>
+    {% if user.is_authenticated %}
+        <div class="container">
+        <button class="btn btn-primary btn-sm"><a class="btn" href="{% url 'create_ticket' %}"><i class="material-icons">add</i>Create New Ticket</a></button>
     {% else %}
         <p>Please <a href="{% url 'login' %}">login</a>or <a href="{% url 'register' %}">register</a> here to add a new ticket or vote for existing tickets</p>
     {% endif %}
@@ -12,37 +12,45 @@
     {% for bug in bugs %}
         <div class="row">
             <div class="col s12 m6">
-                <div class="card white">
-                    <div class="card-content blue-grey-text">
-                        <div class="date">
-                            {{ bug.created_date }}
+                <div class="card">
+                    <h5 class="card-header">{{ bug.title }}</h5>
+                    <div class="card-body">
+                        <p>{{ bug.description }}</p>
+                        {% ifequal bug.ticket_status "Todo" %}
+                            <span class="badge badge-danger">Todo</span>
+                        {% endifequal %}
+                        {% ifequal bug.ticket_status "Doing" %}
+                            <span class="badge badge-warning">Doing</span>
+                        {% endifequal %}
+                        {% ifequal bug.ticket_status "Done" %}
+                            <span class="badge badge-success">Done</span>
+                        {% endifequal %}
+
+
+                        <span class="badge"> Views: {{ bug.views }} </span>
+
+                        <span class="badge">Votes: {{ bug.votes_total }}</span>
+
+                        <footer class="blockquote-footer">
+                            Submitted on {{ bug.created_date }}
                             by
                             <i>{{ bug.username }}</i>
-                            {% ifequal bug.ticket_status "Todo" %}
-                                <span class="badge red">Todo</span>
-                            {% endifequal %}
-                            {% ifequal bug.ticket_status "Doing" %}
-                                <span class="badge yellow">Doing</span>
-                            {% endifequal %}
-                            {% ifequal bug.ticket_status "Done" %}
-                                <span class="badge green">Done</span>
-                            {% endifequal %}
-                        </div>
-                        <span class="card-title"></span>
-
-                        <span>{{ bug.title }}</span>
-                        <span class="badge"> Views: {{ bug.views }} </span>
-                        <p> <!--<span class="badge">Votes: {{ bug.upvotes }}</span>-->{{ bug.description }}</p>
+                        </footer>
                     </div>
                     <div class="card-action">
-                        <a href="{% url 'single_view' %}?id={{ bug.id }}">View Details</a>
-                        <a href="#">Vote</a>
+                        <a href="{% url 'single_view' %}?id={{ bug.id }}" class="btn btn-primary btn-sm">View Details</a>
+                        {%  if voted %}
+                            <a href="{% url 'upvote' %}?id={{ bug.id }}" class="btn btn-success btn-sm">Voted, thank you</a>
+                        {% else %}
+                            <a href="{% url 'upvote' %}?id={{ bug.id }}" class="btn btn-secondary btn-sm">I have this too</a>
+                        {%  endif %}
                         {% if username == user %}
                             <form method="GET" action="edit/{{ bug.id }}">
                                 <input type="submit" value="Edit">
                             </form>
                         {% endif %}
                     </div>
+
                 </div>
             </div>
         </div>
@@ -53,33 +61,34 @@
     {% for feature in features %}
         <div class="row">
             <div class="col s12 m6">
-                <div class="card white">
-                    <div class="card-content blue-grey-text">
-                        <div class="date">
-                            {{ feature.created_date }}
+                <div class="card">
+                    <h5 class="card-header">{{ feature.title }}</h5>
+                    <div class="card-body">
+                        <p>{{ feature.description }}</p>
+                        {% ifequal feature.ticket_status "Todo" %}
+                            <span class="badge badge-danger">Todo</span>
+                        {% endifequal %}
+                        {% ifequal feature.ticket_status "Doing" %}
+                            <span class="badge badge-warning">Doing</span>
+                        {% endifequal %}
+                        {% ifequal feature.ticket_status "Done" %}
+                            <span class="badge badge-success">Done</span>
+                        {% endifequal %}
+
+                        <span class="badge"> Views: {{ feature.views }} </span>
+                        <span class="badge">Votes: {{ feature.votes_total }}</span>
+
+                        <footer class="blockquote-footer">
+                            Submitted on {{ feature.created_date }}
                             by
                             <i>{{ feature.username }}</i>
-                            {% ifequal feature.ticket_status "Todo" %}
-                                <span class="badge red">Todo</span>
-                            {% endifequal %}
-                            {% ifequal feature.ticket_status "Doing" %}
-                                <span class="badge yellow">Doing</span>
-                            {% endifequal %}
-                            {% ifequal feature.ticket_status "Done" %}
-                                <span class="badge green">Done</span>
-                            {% endifequal %}
-                        </div>
-                        <span class="card-title"></span>
-
-                        <span>{{ feature.title }}</span>
-                        <span class="badge"> Views: {{ bug.views }} </span>
-                        <p> <!--<span class="badge">Votes: {{ feature.upvotes }}</span>-->{{ feature.description }}</p>
+                        </footer>
                     </div>
                     <div class="card-action">
-                        <a href="{% url 'single_view' %}?id={{ feature.id }}">View Details</a>
-                        <a href="#">Vote</a>
+                        <a href="{% url 'single_view' %}?id={{ feature.id }}" class="btn btn-primary btn-sm">View Details</a>
+                        <a href="#" class="btn btn-secondary btn-sm">I want to have this too</a>
                         {% if username == user %}
-                            <form method="GET" action="edit/{{ bug.id }}">
+                            <form method="GET" action="edit/{{ feature.id }}">
                                 <input type="submit" value="Edit">
                             </form>
                         {% endif %}

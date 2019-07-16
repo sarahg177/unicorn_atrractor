@@ -5,54 +5,73 @@
 
 {% block content %}
 <div class="container">
+        <div class="row">
+            <div class="col s12 m6">
+                <div class="card">
+                <h5 class="card-header">{{ ticket.title }}</h5>
+                    <div class="card-body">
+                            {% ifequal ticket.ticket_status "Todo" %}
+                                <span class="badge badge-danger">Todo</span>
+                            {% endifequal %}
+                            {% ifequal ticket.ticket_status "Doing" %}
+                                <span class="badge badge-warning">Doing</span>
+                            {% endifequal %}
+                            {% ifequal ticket.ticket_status "Done" %}
+                                <span class="badge badge-success">Done</span>
+                            {% endifequal %}
+                        </div>
+                    <p>{{ ticket.description }}</p>
+                        <span class="badge"> Views: {{ ticket.views }} </span>
+
+                        <span class="badge">Votes: {{ ticket.votes_total }}</span>
+                    <footer class="blockquote-footer">
+                        Submitted on {{ ticket.created_date }}
+                        by
+                        <i>{{ ticket.username }}</i>
+                    </footer>
+
+                    <div class="card-action">
+                    {%  if voted %}
+                        <a href="{% url 'upvote' %}?id={{ ticket.id }}" class="btn btn-success btn-sm">Voted, thank you</a>
+                    {% else %}
+                        <a href="{% url 'upvote' %}?id={{ ticket.id }}" class="btn btn-secondary btn-sm">I have this too</a>
+                    {%  endif %}
+                    <a href="{% url 'ticket_list' %}" class="btn btn-primary btn-sm">Back</a>
+                        {% if username == user %}
+                            <form method="GET" action="edit/{{ ticket.id }}">
+                                <input type="submit" value="Edit">
+                            </form>
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+<h4>Comments</h4>
+{% for comment in comments %}
     <div class="row">
         <div class="col s12">
-            <div class="card white">
-                <div class="card-content blue-grey-text">
+            <div class="card">
 
-                    <div class="date">
-                        {{ ticket.created_date }} by
-                        <i>{{ ticket.username }}</i> {% ifequal ticket.ticket_status "Todo" %}
-                        <span class="badge red">Todo</span> {% endifequal %} {% ifequal ticket.ticket_status "Doing" %}
-                        <span class="badge yellow">Doing</span> {% endifequal %} {% ifequal ticket.ticket_status "Done" %}
-                        <span class="badge green">Done</span> {% endifequal %}
-                    </div>
-                    <h3>{{ ticket.title }}</h3>
-                     <div class="card-action">
-                        <a href="#">Vote</a>
-                     </div>
-                    <div class="row">
-                        <div class="col s9">
-                            <p>{{ ticket.description }}</p>
-                            <p><span class="badge">Views: {{ ticket.views }}</span> </p>
-                            <!--<p><span class="badge">Votes:</span> {{ ticket.upvotes }}</p>-->
-                            <a href="{% url 'ticket_list' %}" class="btn btn-default">Back</a>
-                        </div>
+                <div class="card-body">
+                    <div class="comments">
+
+                            <footer class="blockquote-footer">
+                            <i>{{ comment.user }}</i> commented on {{ comment.date_commented }}
+                            </footer>
+                            <p>{{ comment.comment }}</p>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="card white">
-        <div class="card-content blue-grey-text">
-            <div class="row">
-                <div class="col s12">
-                    <div class="comments">
-                        <p>Comments:</p>
-                        {% for comment in comments %}
-                        <h4><strong>{{ comment.user }}</strong><span> commented on {{ comment.date_commented }}</span></h4>
-                        <p>{{ comment.comment }}</p>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        </div>
-</div>
+{% endfor %}
 </div>
         <form class="post-form" method="POST" action="{{ request.get_full_path }}">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit" class="btn btn-default">Submit</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
 
 

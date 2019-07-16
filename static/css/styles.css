@@ -6,10 +6,34 @@ main {
 }
 
 .unicorn_logo {
-    height: 35px;
+    height: 55px;
+}
+
+
+.page_heading {
+    text-align: center;
+}
+
+.card {
+    color: black;
+    padding: 15px;
+    margin-bottom: 15px;
+    margin-top: 10px;
 }
 
 .post-form textarea, .post-form input {
-  width: 100%;
+    width: 100%;
 }
+
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) { ... }
+
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) { ... }
+
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { ... }
 

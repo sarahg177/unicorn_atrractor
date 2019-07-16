@@ -44,7 +44,7 @@ class Ticket(models.Model):
 
     description = models.TextField(blank=False)
 
-    upvotes = models.ManyToManyField(User, through='Vote', related_name='voter')
+    votes_total = models.ManyToManyField(User, related_name="votes", blank=True)
 
     views = models.IntegerField(default=0)
 
@@ -56,6 +56,9 @@ class Vote(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE)
     date_voted = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        unique_together = (('user', 'ticket'),)
 
 
 class Comments(models.Model):

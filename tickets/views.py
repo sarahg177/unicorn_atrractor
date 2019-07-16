@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.utils import timezone
-from tickets.models import Ticket, Comments
+from tickets.models import Ticket, Comments, Vote
 from .forms import CommentForm, TicketForm
 
 
@@ -10,21 +10,27 @@ def welcome(request):
 
 def get_ticket_list(request):
     """Shows list of all tickets"""
-    bugs = Ticket.objects.filter(
+    all_bugs = Ticket.objects.filter(
         created_date__lte=timezone.now(),
         issue_type=Ticket.Bug
     )
+    bugs = all_bugs.exclude(ticket_status=Ticket.Done)
     features = Ticket.objects.filter(
         created_date__lte=timezone.now(),
         issue_type=Ticket.Feature
     )
-
-    return render(request, "view_tickets_list.html", {'bugs': bugs, 'features': features})
+    vote_dict = {}
+    if request.user:
+        votes = Vote.objects.filter(user=request.user)
+        for vote in votes:
+            vote_dict[vote.ticket_id] = True
+    bugs_ = [(b, b.id in vote_dict) for b in bugs]
+    return render(request, "view_tickets_list.html", {'bugs': bugs, 'features': features, 'votes': vote_dict})
 
 
 def view_ticket_details(request):
-    """Create a view that will return a single ticket object based on the ticket ID
-    and render it to the 'view_single_ticket.html' template showing comments made."""
+    """Create a view that will return a single ticket object based on the ticket ID, view comments made and user can
+    make comments and render it to the 'view_single_ticket.html' template showing comments made."""
     ticket = Ticket.objects.get(id=request.GET.get('id'))
     ticket.views += 1
     ticket.save()
@@ -50,3 +56,13 @@ def create_a_new_ticket(request):
     else:
         form = TicketForm()
     return render(request, "create_ticket.html", {'form': form})
+
+
+def vote_for_ticket(request):
+    """Increment vote count for bug and redirects to """
+    bug_ticket = request.GET.get('id')
+    bug = Ticket.objects.get(id=bug_ticket)
+    user = request.user
+    vote = Vote(user=user, ticket=bug)
+    vote.save()
+    return redirect('ticket_list')

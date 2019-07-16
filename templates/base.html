@@ -3,70 +3,81 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-  <!--Import Google Icon Font-->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <!-- Font Awesome -->
-  <script src="https://kit.fontawesome.com/1ee6dde756.js"></script>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/1ee6dde756.js"></script>
 
-<!-- Custom CSS -->
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css">
 
     <title>{% block page_title %}{% endblock %}</title>
 </head>
 <body>
-
-    <nav>
-    <div class="nav-wrapper">
-      <a href="{% url 'welcome' %}" class="brand-logo">Unicorn Issue Tracker <img class="unicorn_logo" src="{% static 'images/unicorn_dab.jpeg' %}" alt="Unicorn Logo"></a>
-      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-      <ul class="right hide-on-med-and-down">
-        <li><a href="{% url 'welcome' %}">Home</a></li>
-        <li><a href="{% url 'ticket_list' %}">Tickets</a></li>
-        {% if user.is_authenticated %}
-        <li><a href="#">Graphs</a></li>
-        <li><a href="#">Blog</a></li>
-        <li><a href="{%  url 'logout' %}">Logout</a></li>
-        {% else %}
-        <li><a href="{%  url 'login' %}">Login</a></li>
-        <li><a href="{%  url 'register' %}">Register</a></li>
-        {% endif %}
-      </ul>
-      <ul class="side-nav" id="mobile-demo">
-        <li><a href="{% url 'welcome' %}">Home</a></li>
-        <li><a href="{% url 'ticket_list' %}">Tickets</a></li>
-        {% if user.is_authenticated %}
-        <li><a href="#">Graphs</a></li>
-        <li><a href="#">Blog</a></li>
-        <li><a href="{% url 'logout' %}'">Logout</a></li>
-        {% else %}
-        <li><a href="{%  url 'login' %}">Login</a></li>
-        <li><a href="{% url 'register' %}">Register</a></li>
-        {% endif %}
-      </ul>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{% url 'welcome' %}" class="brand-logo">Unicorn Issue Tracker <img class="unicorn_logo" src="{% static 'images/unicorn_dab.jpeg' %}" alt="Unicorn Logo"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <ul class="nav navbar-nav mr-auto mt-lg-0 justify-content-end ">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'welcome' %}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'ticket_list' %}">Tickets</a>
+            </li>
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Graphs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{%  url 'logout' %}">Logout</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{%  url 'login' %}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{%  url 'register' %}">Register</a>
+                </li>
+            {% endif %}
+        </ul>
     </div>
-  </nav>
+</nav>
 <main>
+<div class="container">
     <h1 class="page_heading">{% block page_heading %}{% endblock %}</h1>
     {% if messages %}
-    <div>
-      {% for message in messages %} {{ message }} {% endfor %}
-    </div>
+        <div>
+            {% for message in messages %} {{ message }} {% endfor %}
+        </div>
     {% endif %}
 
     <div>
-      {% block content %} {% endblock %}
+        {% block content %} {% endblock %}
     </div>
-  </main>
-  <footer class="page-footer">
+</div>
+</main>
+<footer class="page-footer">
     <div class="footer-copyright">
-      <div class="container">
-        &copy;2019 Unicorn
-      </div>
+        <div class="container">
+            &copy;2019 Unicorn
+        </div>
     </div>
-  </footer>
+</footer>
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
