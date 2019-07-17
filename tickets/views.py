@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from tickets.models import Ticket, Comments, Vote
 from .forms import CommentForm, TicketForm
@@ -66,3 +66,18 @@ def vote_for_ticket(request):
     vote = Vote(user=user, ticket=bug)
     vote.save()
     return redirect('ticket_list')
+
+
+def edit_a_bug(request):
+    """Edit a ticket"""
+    ticket = Ticket.objects.get(id=request.GET.get('id'))
+    if request.method == "POST":
+        form = TicketForm(request.POST, request.FILES, instance=ticket)
+        if form.is_valid():
+            ticket = form.save(commit=False)
+            ticket.author = request.user
+            form.save()
+            return redirect('ticket_list')
+    else:
+        form = TicketForm(instance=ticket)
+    return render(request, "create_ticket.html", {'form': form})

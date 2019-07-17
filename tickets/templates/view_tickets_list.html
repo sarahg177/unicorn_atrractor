@@ -29,7 +29,7 @@
 
                         <span class="badge"> Views: {{ bug.views }} </span>
 
-                        <span class="badge">Votes: {{ bug.votes_total }}</span>
+                        <span class="badge"><i class="fas fa-hand-paper"></i> {{ bug.votes_total }}</span>
 
                         <footer class="blockquote-footer">
                             Submitted on {{ bug.created_date }}
@@ -38,16 +38,15 @@
                         </footer>
                     </div>
                     <div class="card-action">
-                        <a href="{% url 'single_view' %}?id={{ bug.id }}" class="btn btn-primary btn-sm">View Details</a>
+                        <a href="{% url 'single_view' %}?id={{ bug.id }}" class="btn btn-primary btn-sm"><span><i class="fas fa-eye"></i></span> View Details</a>
                         {%  if voted %}
-                            <a href="{% url 'upvote' %}?id={{ bug.id }}" class="btn btn-success btn-sm">Voted, thank you</a>
+                            <a href="{% url 'upvote' %}?id={{ bug.id }}" class="btn btn-success btn-sm"><span><i class="fas fa-check"></i></span>Voted, thank you</a>
                         {% else %}
-                            <a href="{% url 'upvote' %}?id={{ bug.id }}" class="btn btn-secondary btn-sm">I have this too</a>
+                            <a href="{% url 'upvote' %}?id={{ bug.id }}" class="btn btn-secondary btn-sm"><span><i class="fas fa-hand-paper"></i></span> I have this too</a>
                         {%  endif %}
-                        {% if username == user %}
-                            <form method="GET" action="edit/{{ bug.id }}">
-                                <input type="submit" value="Edit">
-                            </form>
+                        {% if username == bug.user %}
+                           <a href="{% url 'edit' %}?id={{ bug.id }}"<button type="button" class="btn btn-success btn-sm">
+                            <span><i class="fas fa-pencil-alt"></i></span> Edit </button></a>
                         {% endif %}
                     </div>
 
@@ -75,8 +74,8 @@
                             <span class="badge badge-success">Done</span>
                         {% endifequal %}
 
-                        <span class="badge"> Views: {{ feature.views }} </span>
-                        <span class="badge">Votes: {{ feature.votes_total }}</span>
+                        <span class="badge"><i class="fas fa-eye"></i> {{ feature.views }} </span>
+                        <span class="badge"><i class="fas fa-hand-paper"></i> {{ feature.votes_total }}</span>
 
                         <footer class="blockquote-footer">
                             Submitted on {{ feature.created_date }}
@@ -85,12 +84,11 @@
                         </footer>
                     </div>
                     <div class="card-action">
-                        <a href="{% url 'single_view' %}?id={{ feature.id }}" class="btn btn-primary btn-sm">View Details</a>
-                        <a href="#" class="btn btn-secondary btn-sm">I want to have this too</a>
-                        {% if username == user %}
-                            <form method="GET" action="edit/{{ feature.id }}">
-                                <input type="submit" value="Edit">
-                            </form>
+                        <a href="{% url 'single_view' %}?id={{ feature.id }}" class="btn btn-primary btn-sm"><span><i class="fas fa-eye"></i></span> View Details</a>
+                        <a href="#" class="btn btn-secondary btn-sm"><span><i class="fas fa-hand-paper"></i></span> I want to have this too</a>
+                        {% if username == feature.user %}
+                            <a href="{% url 'edit' %}?id={{ feature.id }}"<button type="button" class="btn btn-success btn-sm">
+                            <span><i class="fas fa-pencil-alt"></i></span> Edit </button></a>
                         {% endif %}
                     </div>
                 </div>
