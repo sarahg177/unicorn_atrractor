@@ -9,51 +9,49 @@
         <p>Please <a href="{% url 'login' %}">login</a>or <a href="{% url 'register' %}">register</a> here to add a new ticket or vote for existing tickets</p>
     {% endif %}
 
-    {% for bug in bugs %}
-        <div class="row">
-            <div class="col s12 m6">
-                <div class="card">
-                    <h5 class="card-header">{{ bug.title }}</h5>
-                    <div class="card-body">
-                        <p>{{ bug.description }}</p>
-                        {% ifequal bug.ticket_status "Todo" %}
-                            <span class="badge badge-danger">Todo</span>
-                        {% endifequal %}
-                        {% ifequal bug.ticket_status "Doing" %}
-                            <span class="badge badge-warning">Doing</span>
-                        {% endifequal %}
-                        {% ifequal bug.ticket_status "Done" %}
-                            <span class="badge badge-success">Done</span>
-                        {% endifequal %}
+{% for bug in bugs %}
+    <div class="row">
+        <div class="col s12 m6">
+            <div class="card">
+                <h5 class="card-header">{{ bug.title }}</h5>
+                <div class="card-body">
+                    {% ifequal bug.ticket_status "Todo" %}
+                        <span class="badge badge-danger">Todo</span>
+                    {% endifequal %}
+                    {% ifequal bug.ticket_status "Doing" %}
+                        <span class="badge badge-warning">Doing</span>
+                    {% endifequal %}
+                    {% ifequal bug.ticket_status "Done" %}
+                        <span class="badge badge-success">Done</span>
+                    {% endifequal %}
 
 
-                        <span class="badge"> Views: {{ bug.views }} </span>
+                    <span class="badge"><i class="fas fa-eye"></i> {{ bug.views }} </span>
 
-                        <span class="badge"><i class="fas fa-hand-paper"></i> {{ bug.votes_total }}</span>
+                    <span class="badge"><i class="fas fa-hand-paper"></i> {{ bug.votes_total }}</span>
 
-                        <footer class="blockquote-footer">
-                            Submitted on {{ bug.created_date }}
-                            by
-                            <i>{{ bug.username }}</i>
-                        </footer>
-                    </div>
-                    <div class="card-action">
-                        <a href="{% url 'single_view' %}?id={{ bug.id }}" class="btn btn-primary btn-sm"><span><i class="fas fa-eye"></i></span> View Details</a>
-                        {%  if voted %}
-                            <a href="{% url 'upvote' %}?id={{ bug.id }}" class="btn btn-success btn-sm"><span><i class="fas fa-check"></i></span>Voted, thank you</a>
-                        {% else %}
-                            <a href="{% url 'upvote' %}?id={{ bug.id }}" class="btn btn-secondary btn-sm"><span><i class="fas fa-hand-paper"></i></span> I have this too</a>
-                        {%  endif %}
-                        {% if username == bug.user %}
-                           <a href="{% url 'edit' %}?id={{ bug.id }}"<button type="button" class="btn btn-success btn-sm">
-                            <span><i class="fas fa-pencil-alt"></i></span> Edit </button></a>
-                        {% endif %}
-                    </div>
-
+                    <footer class="blockquote-footer">
+                        Submitted on {{ bug.created_date }}
+                        by
+                        <i>{{ bug.username }}</i>
+                    </footer>
+                </div>
+                <div class="card-action">
+                    <a href="{% url 'single_view' %}?id={{ bug.id }}" class="btn btn-primary btn-sm"><span><i class="fas fa-eye"></i></span> View Details</a>
+                    {%  if votes %}
+                        <a href="{% url 'upvote' %}?id={{ bug.id }}" class="btn btn-success btn-sm"><span><i class="fas fa-check"></i></span> Thank you for your vote</a>
+                    {% else %}
+                        <a href="{% url 'upvote' %}?id={{ bug.id }}&next={{ request.get_full_path }}" class="btn btn-secondary btn-sm"><span><i class="fas fa-hand-paper"></i></span> I have this too</a>
+                    {%  endif %}
+                    {% if bug.username == user %}
+                        <a href="{% url 'edit' %}?id={{ bug.id }}"><button type="button" class="btn btn-warning btn-sm">
+                        <span><i class="fas fa-pencil-alt"></i></span> Edit </button></a>
+                    {% endif %}
                 </div>
             </div>
         </div>
-    {% endfor %}
+    </div>
+{% endfor %}
 
     <h1><i class="fab fa-medapps"></i> Current List of Feature Tickets</h1>
 
@@ -63,7 +61,6 @@
                 <div class="card">
                     <h5 class="card-header">{{ feature.title }}</h5>
                     <div class="card-body">
-                        <p>{{ feature.description }}</p>
                         {% ifequal feature.ticket_status "Todo" %}
                             <span class="badge badge-danger">Todo</span>
                         {% endifequal %}
@@ -75,7 +72,7 @@
                         {% endifequal %}
 
                         <span class="badge"><i class="fas fa-eye"></i> {{ feature.views }} </span>
-                        <span class="badge"><i class="fas fa-hand-paper"></i> {{ feature.votes_total }}</span>
+                        <span class="badge"><i class="fas fa-pound-sign"></i> {{ feature.votes_total }}</span>
 
                         <footer class="blockquote-footer">
                             Submitted on {{ feature.created_date }}
@@ -86,8 +83,8 @@
                     <div class="card-action">
                         <a href="{% url 'single_view' %}?id={{ feature.id }}" class="btn btn-primary btn-sm"><span><i class="fas fa-eye"></i></span> View Details</a>
                         <a href="#" class="btn btn-secondary btn-sm"><span><i class="fas fa-hand-paper"></i></span> I want to have this too</a>
-                        {% if username == feature.user %}
-                            <a href="{% url 'edit' %}?id={{ feature.id }}"<button type="button" class="btn btn-success btn-sm">
+                        {% if feature.username == user %}
+                            <a href="{% url 'edit' %}?id={{ feature.id }}"><button type="button" class="btn btn-warning btn-sm">
                             <span><i class="fas fa-pencil-alt"></i></span> Edit </button></a>
                         {% endif %}
                     </div>

@@ -32,7 +32,7 @@
 
                     <div class="card-action">
                     {%  if voted %}
-                        <a href="{% url 'upvote' %}?id={{ ticket.id }}" class="btn btn-success btn-sm">Voted, thank you</a>
+                        <a href="{% url 'upvote' %}?id={{ ticket.id }}" class="btn btn-success btn-sm">Thank you for your vote</a>
                     {% else %}
                         <a href="{% url 'upvote' %}?id={{ ticket.id }}" class="btn btn-secondary btn-sm">I have this too</a>
                     {%  endif %}

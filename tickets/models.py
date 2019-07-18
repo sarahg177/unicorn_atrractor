@@ -44,7 +44,11 @@ class Ticket(models.Model):
 
     description = models.TextField(blank=False)
 
-    votes_total = models.ManyToManyField(User, related_name="votes", blank=True)
+    votes = models.ManyToManyField(User, related_name="votes", blank=True)
+
+    votes_total = models.IntegerField(default=0)
+
+    money_raised = models.IntegerField(null=True, blank=True)
 
     views = models.IntegerField(default=0)
 

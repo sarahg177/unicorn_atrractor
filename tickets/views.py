@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.utils import timezone
 from tickets.models import Ticket, Comments, Vote
 from .forms import CommentForm, TicketForm
@@ -25,7 +25,9 @@ def get_ticket_list(request):
         for vote in votes:
             vote_dict[vote.ticket_id] = True
     bugs_ = [(b, b.id in vote_dict) for b in bugs]
-    return render(request, "view_tickets_list.html", {'bugs': bugs, 'features': features, 'votes': vote_dict})
+
+    return render(request, "view_tickets_list.html", {
+        'bugs': bugs, 'features': features, 'votes': vote_dict})
 
 
 def view_ticket_details(request):
@@ -35,13 +37,22 @@ def view_ticket_details(request):
     ticket.views += 1
     ticket.save()
     form = CommentForm()
+    try:
+        vote = Vote.objects.get(ticket=ticket, user=request.user)
+    except Vote.DoesNotExist:
+        vote = None
+
+    voted_by_user = False
+    if vote:
+        voted_by_user = True
     if 'comment' in request.POST:
         comment = request.POST.get('comment')
         comment = Comments(user=request.user, ticket=ticket, comment=comment)
         comment.save()
     posted_comments = Comments.objects.filter(ticket=ticket)
 
-    return render(request, "view_single_ticket.html", {'form': form, 'ticket': ticket, 'comments': posted_comments})
+    return render(request, "view_single_ticket.html", {
+        'form': form, 'ticket': ticket, 'comments': posted_comments, 'voted': voted_by_user})
 
 
 def create_a_new_ticket(request):
@@ -61,11 +72,16 @@ def create_a_new_ticket(request):
 def vote_for_ticket(request):
     """Increment vote count for bug and redirects to """
     bug_ticket = request.GET.get('id')
+    next_page = "single_view?id=" + str(bug_ticket)
+    if "next" in request.GET:
+        next_page = request.GET.get('next')
     bug = Ticket.objects.get(id=bug_ticket)
+    bug.votes_total += 1
+    bug.save()
     user = request.user
     vote = Vote(user=user, ticket=bug)
     vote.save()
-    return redirect('ticket_list')
+    return redirect(next_page)
 
 
 def edit_a_bug(request):
