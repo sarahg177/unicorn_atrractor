@@ -21,9 +21,12 @@
                             {% endifequal %}
                         </div>
                     <p>{{ ticket.description }}</p>
-                        <span class="badge"> Views: {{ ticket.views }} </span>
-
-                        <span class="badge">Votes: {{ ticket.votes_total }}</span>
+                        <span class="badge"><i class="fas fa-eye"></i> {{ ticket.views }} </span>
+                     {% if ticket.issue_type == 'Bug' %}
+                        <span class="badge"><i class="fas fa-hand-paper"></i> {{ ticket.votes_total }}</span>
+                {%  else %}
+                <span class="badge"><i class="fas fa-pound-sign"></i> {{ ticket.money_raised }}</span>
+                {% endif %}
                     <footer class="blockquote-footer">
                         Submitted on {{ ticket.created_date }}
                         by
@@ -31,7 +34,7 @@
                     </footer>
 
                     <div class="card-action">
-                    {%  if voted %}
+                    {%  if votes %}
                         <a href="{% url 'upvote' %}?id={{ ticket.id }}" class="btn btn-success btn-sm">Thank you for your vote</a>
                     {% else %}
                         <a href="{% url 'upvote' %}?id={{ ticket.id }}" class="btn btn-secondary btn-sm">I have this too</a>

@@ -69,6 +69,21 @@ def create_a_new_ticket(request):
     return render(request, "create_ticket.html", {'form': form})
 
 
+def edit_a_bug(request):
+    """Edit a ticket"""
+    ticket = Ticket.objects.get(id=request.GET.get('id'))
+    if request.method == "POST":
+        form = TicketForm(request.POST, request.FILES, instance=ticket)
+        if form.is_valid():
+            ticket = form.save(commit=False)
+            ticket.author = request.user
+            form.save()
+            return redirect('ticket_list')
+    else:
+        form = TicketForm(instance=ticket)
+    return render(request, "create_ticket.html", {'form': form})
+
+
 def vote_for_ticket(request):
     """Increment vote count for bug and redirects to """
     bug_ticket = request.GET.get('id')
@@ -84,16 +99,13 @@ def vote_for_ticket(request):
     return redirect(next_page)
 
 
-def edit_a_bug(request):
-    """Edit a ticket"""
-    ticket = Ticket.objects.get(id=request.GET.get('id'))
-    if request.method == "POST":
-        form = TicketForm(request.POST, request.FILES, instance=ticket)
-        if form.is_valid():
-            ticket = form.save(commit=False)
-            ticket.author = request.user
-            form.save()
-            return redirect('ticket_list')
-    else:
-        form = TicketForm(instance=ticket)
-    return render(request, "create_ticket.html", {'form': form})
+def feature_payment(request):
+    """Increases money raised by # and redirects # to """
+    feature_ticket = request.GET.get('id')
+    next_page = "single_view?id=" + str(feature_ticket)
+    if "next" in request.GET:
+        next_page = request.GET.get('next')
+    feature = Ticket.objects.get(id=request.GET.get('id'))
+    feature.money_raised += 20
+    feature.save()
+    return redirect(next_page)

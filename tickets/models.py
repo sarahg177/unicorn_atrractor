@@ -48,7 +48,7 @@ class Ticket(models.Model):
 
     votes_total = models.IntegerField(default=0)
 
-    money_raised = models.IntegerField(null=True, blank=True)
+    money_raised = models.IntegerField(default=0)
 
     views = models.IntegerField(default=0)
 
