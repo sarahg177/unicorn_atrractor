@@ -2,11 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8db86871-1ba8-4050-abca-9cfc33df7bbe" name="Default Changelist" comment="Styles.css added and welcome page added">
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/env.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/products/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/products/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/unicorn_atrractor/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/unicorn_atrractor/settings.py" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tickets/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/tickets/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tickets/templates/view_single_ticket.html" beforeDir="false" afterPath="$PROJECT_DIR$/tickets/templates/view_single_ticket.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tickets/templates/view_tickets_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/tickets/templates/view_tickets_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tickets/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/tickets/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tickets/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/tickets/views.py" afterDir="false" />
+>>>>>>> parent of 318dab6... products app added
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,6 +31,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tickets/templates/view_single_ticket.html">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="338">
               <caret line="35" column="45" selection-start-line="35" selection-start-column="45" selection-end-line="35" selection-end-column="45" />
             </state>
@@ -57,11 +67,16 @@
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
+=======
+            <state relative-caret-position="405">
+              <caret line="27" column="56" selection-start-line="27" selection-start-column="56" selection-end-line="27" selection-end-column="56" />
+>>>>>>> parent of 318dab6... products app added
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="45">
@@ -71,10 +86,12 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+=======
+>>>>>>> parent of 318dab6... products app added
         <entry file="file://$PROJECT_DIR$/tickets/templates/view_tickets_list.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="517">
-              <caret line="89" column="30" selection-start-line="89" selection-start-column="30" selection-end-line="89" selection-end-column="30" />
+            <state relative-caret-position="60">
+              <caret line="4" column="34" lean-forward="true" selection-start-line="4" selection-start-column="34" selection-end-line="4" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -92,10 +109,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/base.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1020">
+              <caret line="68" column="6" selection-start-line="68" selection-start-column="6" selection-end-line="68" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tickets/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1031">
-              <caret line="99" selection-start-line="99" selection-end-line="99" />
+              <caret line="99" lean-forward="true" selection-start-line="99" selection-end-line="99" />
               <folding>
                 <element signature="e#0#45#0" expanded="true" />
               </folding>
@@ -115,6 +141,18 @@
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
+=======
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/static/css/styles.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="510">
+              <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+>>>>>>> parent of 318dab6... products app added
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -158,6 +196,7 @@
         <option value="$PROJECT_DIR$/users/models.py" />
         <option value="$PROJECT_DIR$/users/urls.py" />
         <option value="$PROJECT_DIR$/users/templates/login.html" />
+        <option value="$PROJECT_DIR$/unicorn_atrractor/settings.py" />
         <option value="$PROJECT_DIR$/users/admin.py" />
         <option value="$PROJECT_DIR$/users/templates/register.html" />
         <option value="$PROJECT_DIR$/tickets/templates/create_ticket.html" />
@@ -172,12 +211,15 @@
         <option value="$PROJECT_DIR$/tickets/views.py" />
         <option value="$PROJECT_DIR$/tickets/templates/view_single_ticket.html" />
         <option value="$PROJECT_DIR$/tickets/templates/view_tickets_list.html" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/products/models.py" />
         <option value="$PROJECT_DIR$/products/admin.py" />
         <option value="$PROJECT_DIR$/products/tests.py" />
         <option value="$PROJECT_DIR$/products/views.py" />
         <option value="$PROJECT_DIR$/env.py" />
         <option value="$PROJECT_DIR$/unicorn_atrractor/settings.py" />
+=======
+>>>>>>> parent of 318dab6... products app added
       </list>
     </option>
   </component>
@@ -209,7 +251,29 @@
             <path>
               <item name="unicorn_atrractor" type="b2602c69:ProjectViewProjectNode" />
               <item name="unicorn_atrractor" type="462c0819:PsiDirectoryNode" />
-              <item name="products" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="unicorn_atrractor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="unicorn_atrractor" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="unicorn_atrractor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="unicorn_atrractor" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="unicorn_atrractor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="unicorn_atrractor" type="462c0819:PsiDirectoryNode" />
+              <item name="tickets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="unicorn_atrractor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="unicorn_atrractor" type="462c0819:PsiDirectoryNode" />
+              <item name="tickets" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="unicorn_atrractor" type="b2602c69:ProjectViewProjectNode" />
@@ -351,12 +415,20 @@
       <workItem from="1562497413920" duration="264000" />
       <workItem from="1562497787717" duration="6145000" />
       <workItem from="1562518498933" duration="20900000" />
+<<<<<<< HEAD
       <workItem from="1562731701844" duration="69169000" />
+=======
+      <workItem from="1562731701844" duration="65630000" />
+>>>>>>> parent of 318dab6... products app added
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="109737000" />
+=======
+    <option name="totallyTimeSpent" value="106198000" />
+>>>>>>> parent of 318dab6... products app added
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -592,6 +664,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/unicorn_atrractor/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2055">
+          <caret line="137" selection-start-line="137" selection-end-line="137" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/tickets/forms.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -619,7 +698,7 @@
     <entry file="file://$PROJECT_DIR$/static/css/styles.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
-          <caret line="34" selection-start-line="34" selection-end-line="34" />
+          <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
         </state>
       </provider>
     </entry>
@@ -653,27 +732,21 @@
     <entry file="file://$PROJECT_DIR$/tickets/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1031">
-          <caret line="99" selection-start-line="99" selection-end-line="99" />
+          <caret line="99" lean-forward="true" selection-start-line="99" selection-end-line="99" />
           <folding>
             <element signature="e#0#45#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tickets/templates/view_tickets_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="517">
-          <caret line="89" column="30" selection-start-line="89" selection-start-column="30" selection-end-line="89" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tickets/templates/view_single_ticket.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="35" column="45" selection-start-line="35" selection-start-column="45" selection-end-line="35" selection-end-column="45" />
+        <state relative-caret-position="405">
+          <caret line="27" column="56" selection-start-line="27" selection-start-column="56" selection-end-line="27" selection-end-column="56" />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/products/admin.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
@@ -729,6 +802,12 @@
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
+=======
+    <entry file="file://$PROJECT_DIR$/tickets/templates/view_tickets_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="34" lean-forward="true" selection-start-line="4" selection-start-column="34" selection-end-line="4" selection-end-column="34" />
+>>>>>>> parent of 318dab6... products app added
         </state>
       </provider>
     </entry>
