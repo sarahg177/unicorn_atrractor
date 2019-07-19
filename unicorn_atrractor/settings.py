@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import env
 #import dj_database_url
 
 if os.environ.get('DEVELOPMENT'):
@@ -26,7 +27,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'spl+w3i_ssg+)g1c%)+#$xu*-$8w1*(+9qps^8ar51_tbjrtfw'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -136,3 +137,6 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 
 LOGIN_REDIRECT_URL = ('ticket_list')
+
+STRIPE_PUBLISHABLE = os.getenv('STRIPE_PUBLISHABLE')
+STRIPE_SECRET = os.getenv('STRIPE_SECRET')
