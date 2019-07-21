@@ -82,15 +82,24 @@
                     </div>
                     <div class="card-action">
                         <a href="{% url 'single_view' %}?id={{ feature.id }}" class="btn btn-primary btn-sm"><span><i class="fas fa-eye"></i></span> View Details</a>
-                     {%  if votes %}
-                        <a href="{% url 'feature_payment' %}?id={{ feature.id }}&next={{ request.get_full_path }}" class="btn btn-success btn-sm" disabled><span><i class="fas fa-check"></i></span> Thank you for your payment</a>
-                         <br>If you wish you may vote and pay as many times as you wish
-                    {% else %}
-                        <a href="{% url 'feature_payment' %}?id={{ feature.id }}&next={{ request.get_full_path }}" class="btn btn-secondary btn-sm"><span><i class="fas fa-hand-paper"></i></span> I want to have this too</a>
-                    {% endif %}
+                        <form action="{% url 'feature_payment' %}?id={{ feature.id }}&next={{ request.get_full_path }}" method="POST">
+                        {% csrf_token %}
+                        <script
+                                src="https://checkout.stripe.com/checkout.js"
+                                class="stripe-button"
+                                data-key="pk_test_TctN9ggKAJ44zddNvOCYYpMa00Ho4jzGso"
+                                data-amount="2000"
+                                data-name="Unicorn Issue Tracker"
+                                data-description="Feature Payment"
+                                data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                                data-locale="auto"
+                                data-currency="gbp"
+                                data-label="I want to have this too">
+                        </script>
+                        </form>
                         {% if feature.username == user %}
                             <a href="{% url 'edit' %}?id={{ feature.id }}"><button type="button" class="btn btn-warning btn-sm">
-                            <span><i class="fas fa-pencil-alt"></i></span> Edit </button></a>
+                                <span><i class="fas fa-pencil-alt"></i></span> Edit </button></a>
                         {% endif %}
                     </div>
                 </div>

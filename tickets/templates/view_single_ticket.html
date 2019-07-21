@@ -34,11 +34,29 @@
                     </footer>
 
                     <div class="card-action">
+                    {% if ticket.issue_type == 'Bug' %}
                     {%  if votes %}
                         <a href="{% url 'upvote' %}?id={{ ticket.id }}" class="btn btn-success btn-sm">Thank you for your vote</a>
                     {% else %}
                         <a href="{% url 'upvote' %}?id={{ ticket.id }}" class="btn btn-secondary btn-sm">I have this too</a>
                     {%  endif %}
+                    {% else %}
+                     <form action="{% url 'feature_payment' %}?id={{ ticket.id }}&next={{ request.get_full_path }}" method="POST">
+                        {% csrf_token %}
+                        <script
+                                src="https://checkout.stripe.com/checkout.js"
+                                class="stripe-button"
+                                data-key="pk_test_TctN9ggKAJ44zddNvOCYYpMa00Ho4jzGso"
+                                data-amount="2000"
+                                data-name="Unicorn Issue Tracker"
+                                data-description="Feature Payment"
+                                data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                                data-locale="auto"
+                                data-currency="gbp"
+                                data-label="I want to have this too">
+                        </script>
+                        </form>
+                    {% endif %}
                     <a href="{% url 'ticket_list' %}" class="btn btn-primary btn-sm">Back</a>
                         {% if username == user %}
                             <form method="GET" action="edit/{{ ticket.id }}">
