@@ -12,5 +12,5 @@ class Post(models.Model):
     published_date = models.DateField(blank=True, null=True, default=timezone.now)
     tag = models.CharField(max_length=30, blank=True, null=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title

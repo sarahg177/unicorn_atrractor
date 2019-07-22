@@ -1,10 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% block page_title %}Blog{% endblock %}
 
-</body>
-</html>
+{% block page_heading %}New Blog Post{% endblock %}
+
+
+{% block content %}
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-info">Save</button>
+    </form>
+
+{% endblock %}

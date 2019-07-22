@@ -11,11 +11,15 @@ def get_posts(request):
     return render(request, "blogpost.html", {'posts': posts})
 
 
-def create_or_edit(request):
-    """Create a view that allows user to create or edit a post"""
-    post = Post.objects.get(id=request.GET.get('id'))
+def create_post(request):
+    """Create a view that allows user to create a post"""
     if request.method == "POST":
-        form = BlogPostForm(request.POST, request.FILES, instance=post)
+        form = BlogPostForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            return redirect(get_posts)
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+            return redirect('blog_list')
+    else:
+        form = BlogPostForm()
+    return render(request, "blogpostform.html", {'form': form})
