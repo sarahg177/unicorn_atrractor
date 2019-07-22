@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% block page_title %}Blog{% endblock %}
+
+{% block page_heading %}Welcome to your Blog{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <a href="{% url 'new_post' %}" class="btn btn-primary btn-sm">Create Post</a>
+        {%  for post in posts %}
+            <div class="row">
+                <div class="col s12 m6">
+                    <div class="card">
+                        <h5 class="card-header">{{ post.title }}</h5>
+                        <div class="card-body">
+                            <p>{{ post.content }}</p>
+                        </div>
+                        <footer class="blockquote-footer">
+                            Published on {{ post.published_date }}
+                            by
+                            <i>{{ post.author }}</i>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

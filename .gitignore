@@ -4,3 +4,4 @@ env.py
 env.py
 /cart/
 /products/
+/db.sqlite3
