@@ -1,5 +1,8 @@
+import json
 from django.shortcuts import render, redirect
 from django.utils import timezone
+from django.db.models import Count
+from datetime import timedelta
 from tickets.models import Ticket, Comments, Vote
 from .forms import CommentForm, TicketForm
 
@@ -109,3 +112,80 @@ def feature_payment(request):
     feature.money_raised += 20
     feature.save()
     return redirect(next_page)
+
+
+def graphs(request):
+    """Renders a view for graphs"""
+    """Bar chart"""
+    day = timezone.now() - timedelta(days=1)
+    week = timezone.now() - timedelta(days=7)
+    month = timezone.now() - timedelta(days=28)
+
+    bug_count_day = Ticket.objects.filter(
+        issue_type=Ticket.Bug,
+        created_date__gte=day
+    ).count()
+
+    feature_count_day = Ticket.objects.filter(
+        issue_type=Ticket.Feature,
+        created_date__gte=day
+    ).count()
+
+    bug_count_week = Ticket.objects.filter(
+        issue_type=Ticket.Bug,
+        created_date__gte=week
+    ).count()
+
+    feature_count_week = Ticket.objects.filter(
+        issue_type=Ticket.Feature,
+        created_date__gte=week
+    ).count()
+
+    bug_count_month = Ticket.objects.filter(
+        issue_type=Ticket.Bug,
+        created_date__gte=month
+    ).count()
+
+    feature_count_month = Ticket.objects.filter(
+        issue_type=Ticket.Feature,
+        created_date__gte=month
+    ).count()
+
+    bugs = Ticket.objects.filter(issue_type=Ticket.Bug)
+    bug_title = Ticket.title
+
+    bug_votes_count = Ticket.objects.filter(
+        issue_type=Ticket.Bug,
+        votes_total__gte=0
+    ).count()
+
+    highest_voted_bug_name = ""
+    highest_voted_bug_count = 0
+    for bug in Ticket.objects.filter(issue_type=Ticket.Bug).annotate(total_votes=Count('votes')):
+        if bug.total_votes > highest_voted_bug_count:
+            highest_voted_bug_count = bug.total_votes
+            highest_voted_bug_name = bug.title
+
+    highest_paid_feature_ticket = Ticket.objects.filter(issue_type=Ticket.Feature, created_date__lte=timezone.now())
+    highest_paid_feature_name = ""
+    highest_paid_feature_amount = 0
+    for feature in highest_paid_feature_ticket:
+        if feature.money_raised > highest_paid_feature_amount:
+            highest_paid_feature_amount = feature.money_raised
+            highest_paid_feature_name = feature
+
+    return render(request, "graphs.html", {
+        'bug_count_day': bug_count_day,
+        'feature_count_day': feature_count_day,
+        'bug_count_week': bug_count_week,
+        'feature_count_week': feature_count_week,
+        'bug_count_month': bug_count_month,
+        'feature_count_month': feature_count_month,
+        'bugs': bugs,
+        'bug_title': bug_title,
+        'bug_votes_count': bug_votes_count,
+        'highest_voted_bug_count': highest_voted_bug_count,
+        'highest_voted_bug_name': highest_voted_bug_name,
+        'highest_paid_feature_amount': highest_paid_feature_amount,
+        'highest_paid_feature_name': highest_paid_feature_name,
+    })
