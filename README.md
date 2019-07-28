@@ -91,4 +91,6 @@ Ticket Status: This shows as coloured badge of
 
 ## Credits
 
+Lightbulb image: <a href='http://hddfhm.com'>http://hddfhm.com</a>
+
 
