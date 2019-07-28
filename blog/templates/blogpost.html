@@ -20,6 +20,12 @@
                             by
                             <i>{{ post.author }}</i>
                         </footer>
+                         {% if post.author == user %}
+                            <a href="{% url 'edit_post' %}?id={{ post.id }}"><button type="button" class="btn btn-warning btn-sm">
+                                <span><i class="fas fa-pencil-alt"></i></span> Edit </button></a>
+                            <a href="{% url 'delete_post' %}?id={{ post.id }}"><button type="button" class="btn btn-danger btn-sm">
+                                <span><i class="fas fa-times"></i></span> Delete </button></a>
+                        {% endif %}
                     </div>
                 </div>
             </div>

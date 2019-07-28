@@ -23,3 +23,25 @@ def create_post(request):
     else:
         form = BlogPostForm()
     return render(request, "blogpostform.html", {'form': form})
+
+
+def edit_a_blog(request):
+    """Edit a blog post"""
+    blog = Post.objects.get(id=request.GET.get('id'))
+    if request.method == "POST":
+        form = BlogPostForm(request.POST, request.FILES, instance=blog)
+        if form.is_valid():
+            blog = form.save(commit=False)
+            blog.author = request.user
+            form.save()
+            return redirect('blog_list')
+    else:
+        form = BlogPostForm(instance=blog)
+    return render(request, "blogpostform.html", {'form': form})
+
+
+def delete_blog(request):
+    """Delete a blog post"""
+    post = Post.objects.get(id=request.GET.get('id'))
+    post.delete()
+    return redirect('blog_list')

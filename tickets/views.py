@@ -1,4 +1,3 @@
-import json
 from django.shortcuts import render, redirect
 from django.utils import timezone
 from django.db.models import Count
@@ -85,6 +84,13 @@ def edit_a_bug(request):
     else:
         form = TicketForm(instance=ticket)
     return render(request, "create_ticket.html", {'form': form})
+
+
+def delete_ticket(request):
+    """Delete a ticket"""
+    ticket = Ticket.objects.get(id=request.GET.get('id'))
+    ticket.delete()
+    return redirect('ticket_list')
 
 
 def vote_for_ticket(request):

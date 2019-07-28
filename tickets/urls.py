@@ -10,4 +10,5 @@ urlpatterns = [
     path('edit', views.edit_a_bug, name='edit'),
     path('feature_payment', views.feature_payment, name='feature_payment'),
     path('graphs', views.graphs, name='graphs'),
+    path('delete', views.delete_ticket, name='delete'),
 ]

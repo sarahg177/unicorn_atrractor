@@ -34,12 +34,20 @@
                     </footer>
 
                     <div class="card-action">
+                     <a href="{% url 'ticket_list' %}" class="btn btn-primary btn-sm">Back</a>
                     {% if ticket.issue_type == 'Bug' %}
                     {%  if votes %}
                         <a href="{% url 'upvote' %}?id={{ ticket.id }}" class="btn btn-success btn-sm">Thank you for your vote</a>
                     {% else %}
                         <a href="{% url 'upvote' %}?id={{ ticket.id }}" class="btn btn-secondary btn-sm">I have this too</a>
-                    {%  endif %}
+                        {%  endif %}
+                         {% if ticket.username == user %}
+                            <a href="{% url 'edit' %}?id={{ feature.id }}"><button type="button" class="btn btn-warning btn-sm">
+                                <span><i class="fas fa-pencil-alt"></i></span> Edit </button></a>
+                            <a href="{% url 'delete' %}?id={{ feature.id }}"><button type="button" class="btn btn-danger btn-sm">
+                                <span><i class="fas fa-times"></i></span> Delete </button></a>
+                        {% endif %}
+
                     {% else %}
                      <form action="{% url 'feature_payment' %}?id={{ ticket.id }}&next={{ request.get_full_path }}" method="POST">
                         {% csrf_token %}
@@ -57,12 +65,8 @@
                         </script>
                         </form>
                     {% endif %}
-                    <a href="{% url 'ticket_list' %}" class="btn btn-primary btn-sm">Back</a>
-                        {% if username == user %}
-                            <form method="GET" action="edit/{{ ticket.id }}">
-                                <input type="submit" value="Edit">
-                            </form>
-                        {% endif %}
+
+
                     </div>
 
                 </div>
