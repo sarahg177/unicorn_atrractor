@@ -1,9 +1,8 @@
 from django.test import TestCase, Client
 from django.utils import timezone
-from django.shortcuts import get_object_or_404
-from .models import Post
+
 from users.models import User
-from .forms import BlogPostForm
+from .models import Post
 
 
 class TestBlogViews(TestCase):
