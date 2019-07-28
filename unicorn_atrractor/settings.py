@@ -11,8 +11,10 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-import env
 #import dj_database_url
+
+if os.path.exists('env.py')
+    import env
 
 if os.environ.get('DEVELOPMENT'):
     development = True
@@ -138,7 +140,7 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 
-LOGIN_REDIRECT_URL = ('ticket_list')
+LOGIN_REDIRECT_URL = 'ticket_list'
 
 STRIPE_PUBLISHABLE = os.getenv('STRIPE_PUBLISHABLE')
 STRIPE_SECRET = os.getenv('STRIPE_SECRET')
