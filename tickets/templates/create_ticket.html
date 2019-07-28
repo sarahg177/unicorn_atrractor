@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
+
+{% load bootstrap_tags %}
+
 {% block page_title %}Add a New Ticket Page{% endblock %}
 {% block page_heading %}<i class="fas fa-bug"></i>Add a New Ticket{% endblock %}
 
@@ -9,7 +12,7 @@
             <form method="POST">
                 {% csrf_token %}
 
-                {{ form.as_p  }}
+                {{ form | as_bootstrap  }}
 
                 <button type="submit">Save</button>
             </form>

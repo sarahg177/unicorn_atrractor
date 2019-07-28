@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+
+{% load bootstrap_tags %}
 {% block page_title %}Bug Details{% endblock %}
 
 {% block page_heading %}<i class="fas fa-bolt"> Ticket Details</i>{% endblock %}
@@ -95,7 +97,7 @@
 </div>
         <form class="post-form" method="POST" action="{{ request.get_full_path }}">
             {% csrf_token %}
-            {{ form.as_p }}
+            {{ form | as_bootstrap }}
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
 
