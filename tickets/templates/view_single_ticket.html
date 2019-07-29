@@ -94,12 +94,12 @@
         </div>
     </div>
 {% endfor %}
-</div>
+
         <form class="post-form" method="POST" action="{{ request.get_full_path }}">
             {% csrf_token %}
             {{ form | as_bootstrap }}
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-
+</div>
 
 {% endblock %}

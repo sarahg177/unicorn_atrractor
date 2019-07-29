@@ -40,7 +40,7 @@ My wireframes can be viewed at https://xd.adobe.com/view/36aa27bd-8b1d-48fe-46ce
 
 The home page consists of a welcome page explaining to the user what the application can be used for. A registration and login button is included in the Navbar. The user can view the tickets if they are not logged in.
 
-###Registration Page
+### Registration Page
 
 The registration page consists of a form with 3 fields, username, password and password verification and a Register button. If the user already has an account there is a link to take them to the login page to sign in.
 
@@ -69,29 +69,91 @@ Ticket Status: This shows as coloured badge of
 
 ### Ticket Details Page
 
+The ticket details page consist of the full details of the submitted ticket as above including - 
+* Details: full description of the ticket.
+* Comments: any comments which have been submitted by other other, showing:
+    * User who submitted a comment
+    * Date and time the comment was submitted
+* Comment form: A textbox where the user can leave their own comments, which will be displayed below the previous comments.
+
 ### Create a New Ticket Page
 
+The create a new ticket page consists of a form with 3 fields, a dropdrown option Issue type, which is set to Feature as default, title and description and a save button
 
 ### Edit Ticket Page
 
+The edit ticket page shows a form similar to creat a ticket page but to edit the ticket all of the fields are populated with the ticket details. The fields can be edited and will update the database once submitted.
+
 ### Graphs Page
+
+The graphs page consist of a bar chart signifying the bugs and features tended to on a daily, weekly and monthly basis. The page also displays the Highest Voted Bug and Highest Paid Feature. Showing the ticket title and the votes or money raised retropectively. I created the bar chart using Highcharts.com
 
 ### Blog Page
 
+The Blog page consists of all of the blogs submitted by users displaying the blog title, contents and the publisher author. This page is paginated showing 10 blog posts on each page. On this page the user can create a post by clicking the button at the top of the page. 
+
 ### New Blog Post Page
 
+The new blog post consist of a form with 4 fields, title, content, tag and published date. The published date field is pre populated with today's date. To button at the bottom saves the blog post.  
 
 ## Feature Left to Implement
 As more bugs and feature are completed add another html page and filter out the done ticket status.
 
 ## Technologies Used
 
+For this project the following technologies were used:
+
+* HTML5
+* CSS3
+* Bootstrap
+* Python
+* Django
+* JavaScript
+* Postgresql
+* PyCharm
+
 ## Testing
+
+### TestCase
+
+### Manual Testing
+
+For testing this application use login details: 
+* Username: test
+* Password: testing1234
+
+Testing for this project has been done with several browsers and devices.
+
+####Browsers
+
+##### Mobile
+* Safari
+* Chrome
+
+##### Desktop
+* Safari
+* Chrome
+* Opera
+
+####Devices
+* iMac
+* MacBook Pro
+* iPhone X
+* iPad Air
+* iPad Pro
+
 
 ## Deployment
 
+###GitHub
+The code for this project can be viewed on GitHub https://github.com/sarahg177/unicorn_attractor
+
+###Heroku
+The application has been deployed to Heroku and can be viewed at https://unicorn-issue.herokuapp.com/
+
 ## Credits
 
-Lightbulb image: <a href='http://hddfhm.com'>http://hddfhm.com</a>
-
+* 
+* Lightbulb image: <a href='http://hddfhm.com'>http://hddfhm.com</a>
+* Mentor Spencer Barriball who has helped me immensely and kept me going when I have struggled. 
 
