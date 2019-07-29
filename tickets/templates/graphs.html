@@ -10,12 +10,14 @@
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 
 <div id="statics" style="min-width: 310px; height: 400px; margin: 0 auto" class="border"></div>
-    <div>
-    <h4>Highest Voted Bug </h4>
-    <h5>{{ highest_voted_bug_name }}<br>{{ highest_voted_bug_count }}</h5>
+
+    <div class="text-center highest">
+    <h3><i class="fas fa-bug"></i> Highest Voted Bug </h3><hr>
+    <h5>{{ highest_voted_bug_name }}<br>{{ highest_voted_bug_count }} votes</h5>
     </div>
-    <div>
-    <h4>Highest Paid Feature</h4>
+    <hr class="strong-break">
+    <div class="text-center">
+    <h3><i class="fab fa-medapps"></i> Highest Paid Feature</h3><hr>
     <h5>{{ highest_paid_feature_name }}<br>£{{ highest_paid_feature_amount }}</h5>
     </div>
 

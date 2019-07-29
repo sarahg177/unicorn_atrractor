@@ -1,115 +1,113 @@
 {% extends 'base.html' %}
 {% block page_title %}Tickets Page{% endblock %}
-{% block page_heading %}<i class="fas fa-bug"></i> Current List of Bug Tickets{% endblock %}
+{% block page_heading %}<i class="fas fa-ticket-alt"></i> Current List of Tickets{% endblock %}
 {% block content %}
     {% if user.is_authenticated %}
         <div class="container">
-        <button class="btn btn-primary btn-sm"><a class="btn" href="{% url 'create_ticket' %}"><i class="material-icons">add</i>Create New Ticket</a></button>
+        <a class="btn btn-primary btn-sm " href="{% url 'create_ticket' %}"><i class="fas fa-plus"></i> Create New Ticket</a>
     {% else %}
         <p>Please <a href="{% url 'login' %}">login</a>or <a href="{% url 'register' %}">register</a> here to add a new ticket or vote for existing tickets</p>
     {% endif %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 col-lg-6">
+                <h2 class="text-center"><i class="fas fa-bug"></i> Bugs</h2>
+                {% for bug in bugs %}
+                    <div class="card">
+                        <h5 class="card-header"><a class="text-decoration-none" href="{% url 'single_view' %}?id={{ bug.id }}"> {{ bug.title }}</a></h5>
+                        <div class="card-body">
+                            <span class="badge"><i class="fas fa-eye"></i> {{ bug.views }} </span>
 
-{% for bug in bugs %}
-    <div class="row">
-        <div class="col s12 m6">
-            <div class="card">
-                <h5 class="card-header">{{ bug.title }}</h5>
-                <div class="card-body">
-                    {% ifequal bug.ticket_status "Todo" %}
-                        <span class="badge badge-danger">Todo</span>
-                    {% endifequal %}
-                    {% ifequal bug.ticket_status "Doing" %}
-                        <span class="badge badge-warning">Doing</span>
-                    {% endifequal %}
-                    {% ifequal bug.ticket_status "Done" %}
-                        <span class="badge badge-success">Done</span>
-                    {% endifequal %}
+                            <span class="badge"><i class="fas fa-hand-paper"></i> {{ bug.votes_total }}</span>
+                            {% ifequal bug.ticket_status "Todo" %}
+                                <span class="badge badge-danger float-right">Todo</span>
+                            {% endifequal %}
+                            {% ifequal bug.ticket_status "Doing" %}
+                                <span class="badge badge-warning float-right">Doing</span>
+                            {% endifequal %}
+                            {% ifequal bug.ticket_status "Done" %}
+                                <span class="badge badge-success float-right">Done</span>
+                            {% endifequal %}
 
 
-                    <span class="badge"><i class="fas fa-eye"></i> {{ bug.views }} </span>
 
-                    <span class="badge"><i class="fas fa-hand-paper"></i> {{ bug.votes_total }}</span>
 
-                    <footer class="blockquote-footer">
-                        Submitted on {{ bug.created_date }}
-                        by
-                        <i>{{ bug.username }}</i>
-                    </footer>
-                </div>
-                <div class="card-action">
-                    <a href="{% url 'single_view' %}?id={{ bug.id }}" class="btn btn-primary btn-sm"><span><i class="fas fa-eye"></i></span> View Details</a>
-                    {%  if votes %}
-                        <a class="btn btn-success btn-sm" disabled><span><i class="fas fa-check"></i></span> Thank you for your vote</a>
-                    {% else %}
-                        <a href="{% url 'upvote' %}?id={{ bug.id }}&next={{ request.get_full_path }}" class="btn btn-secondary btn-sm"><span><i class="fas fa-hand-paper"></i></span> I have this too</a>
-                    {%  endif %}
-                    {% if bug.username == user %}
-                        <a href="{% url 'edit' %}?id={{ bug.id }}"><button type="button" class="btn btn-warning btn-sm">
-                        <span><i class="fas fa-pencil-alt"></i></span> Edit </button></a>
-                        <a href="{% url 'delete' %}?id={{ bug.id }}"><button type="button" class="btn btn-danger btn-sm">
-                        <span><i class="fas fa-times"></i></span> Delete </button></a>
-                    {% endif %}
-                </div>
+                            <footer class="blockquote-footer">
+                                Submitted on {{ bug.created_date }}
+                                by
+                                <i>{{ bug.username }}</i>
+                            </footer>
+                        </div>
+                        <div class="card-action">
+                            <a href="{% url 'single_view' %}?id={{ bug.id }}" class="btn btn-primary btn-sm"><span><i class="fas fa-eye"></i></span> View Details</a>
+                            {%  if vote %}
+                                <a class="btn btn-success btn-sm" disabled><span><i class="fas fa-check"></i></span> Thank you for your vote</a>
+                            {% else %}
+                                <a href="{% url 'upvote' %}?id={{ bug.id }}&next={{ request.get_full_path }}" class="btn btn-secondary btn-sm"><span><i class="fas fa-hand-paper"></i></span> I have this too</a>
+                            {%  endif %}<br>
+                            {% if bug.username == user %}
+                                <a href="{% url 'edit' %}?id={{ bug.id }}"><button type="button" class="btn btn-warning btn-sm">
+                                    <span><i class="fas fa-pencil-alt"></i></span> Edit </button></a>
+                                <a href="{% url 'delete' %}?id={{ bug.id }}"><button type="button" class="btn btn-danger btn-sm">
+                                    <span><i class="fas fa-times"></i></span> Delete </button></a>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
+            <div class="col-md-12 col-lg-6">
+                <h2 class="text-center"><i class="fab fa-medapps"></i> Features</h2>
+                {% for feature in features %}
+                    <div class="card">
+                        <h5 class="card-header">{{ feature.title }}</h5>
+                        <div class="card-body">
+                            <span class="badge"><i class="fas fa-eye"></i> {{ feature.views }} </span>
+                            <span class="badge"><i class="fas fa-pound-sign"></i> {{ feature.money_raised }}</span>
+                            {% ifequal feature.ticket_status "Todo" %}
+                                <span class="badge badge-danger float-right">Todo</span>
+                            {% endifequal %}
+                            {% ifequal feature.ticket_status "Doing" %}
+                                <span class="badge badge-warning float-right">Doing</span>
+                            {% endifequal %}
+                            {% ifequal feature.ticket_status "Done" %}
+                                <span class="badge badge-success float-right">Done</span>
+                            {% endifequal %}
+
+
+
+                            <footer class="blockquote-footer">
+                                Submitted on {{ feature.created_date }}
+                                by
+                                <i>{{ feature.username }}</i>
+                            </footer>
+                        </div>
+                        <div class="card-action">
+                            <a href="{% url 'single_view' %}?id={{ feature.id }}" class="btn btn-primary btn-sm"><span><i class="fas fa-eye"></i></span> View Details</a>
+                            <form action="{% url 'feature_payment' %}?id={{ feature.id }}&next={{ request.get_full_path }}" method="POST">
+                                {% csrf_token %}
+                                <script
+                                        src="https://checkout.stripe.com/checkout.js"
+                                        class="stripe-button"
+                                        data-key="pk_test_TctN9ggKAJ44zddNvOCYYpMa00Ho4jzGso"
+                                        data-amount="2000"
+                                        data-name="Unicorn Issue Tracker"
+                                        data-description="Feature Payment"
+                                        data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                                        data-locale="auto"
+                                        data-currency="gbp"
+                                        data-label="I want to have this too">
+                                </script>
+                            </form>
+                            {% if feature.username == user %}
+                                <a href="{% url 'edit' %}?id={{ feature.id }}"><button type="button" class="btn btn-warning btn-sm">
+                                    <span><i class="fas fa-pencil-alt"></i></span> Edit </button></a>
+                                <a href="{% url 'delete' %}?id={{ feature.id }}"><button type="button" class="btn btn-danger btn-sm">
+                                    <span><i class="fas fa-times"></i></span> Delete </button></a>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
         </div>
     </div>
-{% endfor %}
-
-    <h1><i class="fab fa-medapps"></i> Current List of Feature Tickets</h1>
-
-    {% for feature in features %}
-        <div class="row">
-            <div class="col s12 m6">
-                <div class="card">
-                    <h5 class="card-header">{{ feature.title }}</h5>
-                    <div class="card-body">
-                        {% ifequal feature.ticket_status "Todo" %}
-                            <span class="badge badge-danger">Todo</span>
-                        {% endifequal %}
-                        {% ifequal feature.ticket_status "Doing" %}
-                            <span class="badge badge-warning">Doing</span>
-                        {% endifequal %}
-                        {% ifequal feature.ticket_status "Done" %}
-                            <span class="badge badge-success">Done</span>
-                        {% endifequal %}
-
-                        <span class="badge"><i class="fas fa-eye"></i> {{ feature.views }} </span>
-                        <span class="badge"><i class="fas fa-pound-sign"></i> {{ feature.money_raised }}</span>
-
-                        <footer class="blockquote-footer">
-                            Submitted on {{ feature.created_date }}
-                            by
-                            <i>{{ feature.username }}</i>
-                        </footer>
-                    </div>
-                    <div class="card-action">
-                        <a href="{% url 'single_view' %}?id={{ feature.id }}" class="btn btn-primary btn-sm"><span><i class="fas fa-eye"></i></span> View Details</a>
-                        <form action="{% url 'feature_payment' %}?id={{ feature.id }}&next={{ request.get_full_path }}" method="POST">
-                        {% csrf_token %}
-                        <script
-                                src="https://checkout.stripe.com/checkout.js"
-                                class="stripe-button"
-                                data-key="pk_test_TctN9ggKAJ44zddNvOCYYpMa00Ho4jzGso"
-                                data-amount="2000"
-                                data-name="Unicorn Issue Tracker"
-                                data-description="Feature Payment"
-                                data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-                                data-locale="auto"
-                                data-currency="gbp"
-                                data-label="I want to have this too">
-                        </script>
-                        </form>
-                        {% if feature.username == user %}
-                            <a href="{% url 'edit' %}?id={{ feature.id }}"><button type="button" class="btn btn-warning btn-sm">
-                                <span><i class="fas fa-pencil-alt"></i></span> Edit </button></a>
-                            <a href="{% url 'delete' %}?id={{ feature.id }}"><button type="button" class="btn btn-danger btn-sm">
-                                <span><i class="fas fa-times"></i></span> Delete </button></a>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% endfor %}
-
-    <a class="waves-effect waves-light btn"><i class="material-icons right">network_check</i>View Graphs</a> {% endblock %}
+    <a class="btn btn-primary" href="{% url 'graphs' %}"><i class="far fa-chart-bar"></i> View Graph</a> {% endblock %}
 </div>

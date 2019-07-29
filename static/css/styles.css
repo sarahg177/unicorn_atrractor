@@ -1,7 +1,7 @@
 main {
     background-image: url('../images/electric_background.jpeg');
     background-size: cover;
-    height: 90vh;
+    min-height: 90vh;
     color: #fafafa;
 }
 
@@ -25,6 +25,38 @@ main {
     width: 100%;
 }
 
+.carousel-inner img {
+    margin: auto;
+}
+
+.intro{
+    padding-top: 75px;
+    padding-bottom: 100px;
+}
+
+.promise_section {
+    padding-top: 100px;
+}
+
+.btn {
+    margin-bottom: 5px;
+}
+
+.highest {
+    margin-top: 70px;
+}
+
+a {
+    color: black;
+}
+
+hr {
+    border-top: 1px solid rgba(250, 250, 250, 0.2);
+}
+
+.strong-break {
+    border-top: 2px solid rgba(250, 250, 250, 1);
+}
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) { ... }
