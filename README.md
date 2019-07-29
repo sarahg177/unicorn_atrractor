@@ -82,6 +82,7 @@ Ticket Status: This shows as coloured badge of
 
 
 ## Feature Left to Implement
+As more bugs and feature are completed add another html page and filter out the done ticket status.
 
 ## Technologies Used
 

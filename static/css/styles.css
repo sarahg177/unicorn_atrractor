@@ -36,6 +36,11 @@ main {
 
 .promise_section {
     padding-top: 100px;
+    margin-bottom: 25px;
+}
+
+ul {
+    list-style-type: none;
 }
 
 .btn {
