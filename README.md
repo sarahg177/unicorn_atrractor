@@ -124,7 +124,7 @@ For testing this application use login details:
 
 Testing for this project has been done with several browsers and devices.
 
-####Browsers
+#### Browsers
 
 ##### Mobile
 * Safari
@@ -135,7 +135,7 @@ Testing for this project has been done with several browsers and devices.
 * Chrome
 * Opera
 
-####Devices
+#### Devices
 * iMac
 * MacBook Pro
 * iPhone X
@@ -145,15 +145,14 @@ Testing for this project has been done with several browsers and devices.
 
 ## Deployment
 
-###GitHub
+### GitHub
 The code for this project can be viewed on GitHub https://github.com/sarahg177/unicorn_attractor
 
-###Heroku
+### Heroku
 The application has been deployed to Heroku and can be viewed at https://unicorn-issue.herokuapp.com/
 
 ## Credits
 
-* 
-* Lightbulb image: <a href='http://hddfhm.com'>http://hddfhm.com</a>
+* Lightbulb image: http://hddfhm.com
 * Mentor Spencer Barriball who has helped me immensely and kept me going when I have struggled. 
-
+* Students from Slack and the Code Institute tutors for all of their help
