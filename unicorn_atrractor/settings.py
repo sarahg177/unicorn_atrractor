@@ -35,7 +35,8 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1',
-                 os.environ.get('HOSTNAME')]
+                 os.environ.get('HOSTNAME'),
+                 unicorn-issue.herokuapp.com]
 
 
 # Application definition
