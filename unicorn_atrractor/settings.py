@@ -36,7 +36,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1',
                  os.environ.get('HOSTNAME'),
-                 unicorn-issue.herokuapp.com]
+                 'unicorn-issue.herokuapp.com']
 
 
 # Application definition
