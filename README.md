@@ -116,6 +116,11 @@ For this project the following technologies were used:
 
 ### TestCase
 
+
+### Travis
+
+I have included Travis testing for continuous intergration testing.
+
 ### Manual Testing
 
 For testing this application use login details: 
