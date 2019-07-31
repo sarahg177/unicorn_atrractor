@@ -22,3 +22,10 @@ class TestBlogViews(TestCase):
         page = self.client.get("/blog/")
         self.assertEqual(page.status_code, 200)
         self.assertTemplateUsed(page, "blogpost.html")
+
+    def test_create_new_post(self):
+        """Tests to ensure the user can create a new post"""
+        user = self.user
+        page = self.client.get("/new_post/")
+        self.assertEqual(page.status_code, 200)
+        self.assertTemplateUsed(page, "blogpostform.html")

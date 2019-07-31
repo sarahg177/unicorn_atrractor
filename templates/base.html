@@ -36,10 +36,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'welcome' %}">Home</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'ticket_list' %}">Tickets</a>
-            </li>
+
             {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'ticket_list' %}">Tickets</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'graphs' %}">Graphs</a>
                 </li>
@@ -61,18 +62,18 @@
     </div>
 </nav>
 <main>
-<div class="container">
-    <h1 class="page_heading">{% block page_heading %}{% endblock %}</h1>
-    {% if messages %}
-        <div>
-            {% for message in messages %} {{ message }} {% endfor %}
-        </div>
-    {% endif %}
+    <div class="container">
+        <h1 class="page_heading">{% block page_heading %}{% endblock %}</h1>
+        {% if messages %}
+            <div>
+                {% for message in messages %} {{ message }} {% endfor %}
+            </div>
+        {% endif %}
 
-    <div>
-        {% block content %} {% endblock %}
+        <div>
+            {% block content %} {% endblock %}
+        </div>
     </div>
-</div>
 </main>
 <footer class="page-footer text-center">
     <div class="footer-copyright">
