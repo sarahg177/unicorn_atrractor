@@ -6,100 +6,101 @@
 {% block page_heading %}<i class="fas fa-bolt"> Ticket Details</i>{% endblock %}
 
 {% block content %}
-<div class="container">
+    <div class="container">
         <div class="row">
             <div class="col s12 m6">
                 <div class="card">
-                <h5 class="card-header">{{ ticket.title }}</h5>
+                    <h5 class="card-header">{{ ticket.title }}</h5>
                     <div class="card-body">
-                            {% ifequal ticket.ticket_status "Todo" %}
-                                <span class="badge badge-danger">Todo</span>
-                            {% endifequal %}
-                            {% ifequal ticket.ticket_status "Doing" %}
-                                <span class="badge badge-warning">Doing</span>
-                            {% endifequal %}
-                            {% ifequal ticket.ticket_status "Done" %}
-                                <span class="badge badge-success">Done</span>
-                            {% endifequal %}
-                        </div>
-                    <p>{{ ticket.description }}</p>
                         <span class="badge"><i class="fas fa-eye"></i> {{ ticket.views }} </span>
-                     {% if ticket.issue_type == 'Bug' %}
-                        <span class="badge"><i class="fas fa-hand-paper"></i> {{ ticket.votes_total }}</span>
-                {%  else %}
-                <span class="badge"><i class="fas fa-pound-sign"></i> {{ ticket.money_raised }}</span>
-                {% endif %}
+                        {% if ticket.issue_type == 'Bug' %}
+                            <span class="badge"><i class="fas fa-hand-paper"></i> {{ ticket.votes_total }}</span>
+                        {%  else %}
+                            <span class="badge"><i class="fas fa-pound-sign"></i> {{ ticket.money_raised }}</span>
+                        {% endif %}
+                        {% ifequal ticket.ticket_status "Todo" %}
+                            <span class="badge badge-danger float-right">Todo</span>
+                        {% endifequal %}
+                        {% ifequal ticket.ticket_status "Doing" %}
+                            <span class="badge badge-warning">Doing</span>
+                        {% endifequal %}
+                        {% ifequal ticket.ticket_status "Done" %}
+                            <span class="badge badge-success">Done</span>
+                        {% endifequal %}
+
+                    <p>{{ ticket.description }}</p>
+
                     <footer class="blockquote-footer">
                         Submitted on {{ ticket.created_date }}
                         by
                         <i>{{ ticket.username }}</i>
                     </footer>
-
+                    </div>
                     <div class="card-action">
-                     <a href="{% url 'ticket_list' %}" class="btn btn-primary btn-sm">Back</a>
-                    {% if ticket.issue_type == 'Bug' %}
-                    {%  if votes %}
-                        <a href="{% url 'upvote' %}?id={{ ticket.id }}" class="btn btn-success btn-sm">Thank you for your vote</a>
-                    {% else %}
-                        <a href="{% url 'upvote' %}?id={{ ticket.id }}" class="btn btn-secondary btn-sm">I have this too</a>
-                        {%  endif %}
-                         {% if ticket.username == user %}
-                            <a href="{% url 'edit' %}?id={{ feature.id }}"><button type="button" class="btn btn-warning btn-sm">
-                                <span><i class="fas fa-pencil-alt"></i></span> Edit </button></a>
-                            <a href="{% url 'delete' %}?id={{ feature.id }}"><button type="button" class="btn btn-danger btn-sm">
-                                <span><i class="fas fa-times"></i></span> Delete </button></a>
+                        <a href="{% url 'ticket_list' %}" class="btn btn-primary btn-sm">Back</a>
+                        {% if ticket.issue_type == 'Bug' %}
+                            {%  if votes %}
+                                <a class="btn btn-success btn-sm" disabled><span><i class="fas fa-check"></i></span> Thank you for your vote</a>
+                            {% else %}
+                                <a href="{% url 'upvote' %}?id={{ ticket.id }}&next={{ request.get_full_path }}" class="btn btn-secondary btn-sm"><span><i class="fas fa-hand-paper"></i></span> I have this too</a>
+                            {%  endif %}
+                            {% if ticket.username == user %}
+                                <a href="{% url 'edit' %}?id={{ feature.id }}"><button type="button" class="btn btn-warning btn-sm">
+                                    <span><i class="fas fa-pencil-alt"></i></span> Edit </button></a>
+                                <a href="{% url 'delete' %}?id={{ feature.id }}"><button type="button" class="btn btn-danger btn-sm">
+                                    <span><i class="fas fa-times"></i></span> Delete </button></a>
+                            {% endif %}
+
+                        {% else %}
+                            <form action="{% url 'feature_payment' %}?id={{ ticket.id }}&next={{ request.get_full_path }}" method="POST">
+                                {% csrf_token %}
+                                <script
+                                        src="https://checkout.stripe.com/checkout.js"
+                                        class="stripe-button"
+                                        data-key="pk_test_TctN9ggKAJ44zddNvOCYYpMa00Ho4jzGso"
+                                        data-amount="2000"
+                                        data-name="Unicorn Issue Tracker"
+                                        data-description="Feature Payment"
+                                        data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                                        data-locale="auto"
+                                        data-currency="gbp"
+                                        data-label="I want to have this too">
+                                </script>
+                            </form>
                         {% endif %}
 
-                    {% else %}
-                     <form action="{% url 'feature_payment' %}?id={{ ticket.id }}&next={{ request.get_full_path }}" method="POST">
-                        {% csrf_token %}
-                        <script
-                                src="https://checkout.stripe.com/checkout.js"
-                                class="stripe-button"
-                                data-key="pk_test_TctN9ggKAJ44zddNvOCYYpMa00Ho4jzGso"
-                                data-amount="2000"
-                                data-name="Unicorn Issue Tracker"
-                                data-description="Feature Payment"
-                                data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-                                data-locale="auto"
-                                data-currency="gbp"
-                                data-label="I want to have this too">
-                        </script>
-                        </form>
-                    {% endif %}
-
 
                     </div>
 
                 </div>
             </div>
         </div>
-<h4>Comments</h4>
-{% for comment in comments %}
-    <div class="row">
-        <div class="col s12">
-            <div class="card">
+        <h4>Comments</h4>
+        {% for comment in comments %}
+            <div class="row">
+                <div class="col s12">
+                    <div class="card">
 
-                <div class="card-body">
-                    <div class="comments">
+                        <div class="card-body">
+                            <div class="comments">
 
-                            <footer class="blockquote-footer">
-                            <i>{{ comment.user }}</i> commented on {{ comment.date_commented }}
-                            </footer>
-                            <p>{{ comment.comment }}</p>
+                                <footer class="blockquote-footer">
+                                    <i>{{ comment.user }}</i> commented on {{ comment.date_commented }}
+                                </footer>
+                                <p>{{ comment.comment }}</p>
 
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-{% endfor %}
+        {% endfor %}
 
         <form class="post-form" method="POST" action="{{ request.get_full_path }}">
             {% csrf_token %}
             {{ form | as_bootstrap }}
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-</div>
+    </div>
 
 {% endblock %}
