@@ -90,7 +90,8 @@ The graphs page consist of a bar chart signifying the bugs and features tended t
 
 ### Blog Page
 
-The Blog page consists of all of the blogs submitted by users displaying the blog title, contents and the publisher author. This page is paginated showing 10 blog posts on each page. On this page the user can create a post by clicking the button at the top of the page. 
+The Blog page consists of all of the blogs submitted by users displaying the blog title, contents and the publisher author. This page is paginated showing 5 blog posts on each page. On this page the user can create a post by clicking the button at the top of the page. 
+
 
 ### New Blog Post Page
 
