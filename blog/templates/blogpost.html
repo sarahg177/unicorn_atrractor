@@ -19,14 +19,15 @@
                             <p>{{ blog.content }}</p>
                         </div>
                         <footer class="blockquote-footer">
-                            Published on {{ post.published_date }}
+                            Published on {{ blog.published_date }}
+
                             by
                             <i>{{ blog.author }}</i>
                         </footer>
                          {% if blog.author == user %}
-                            <a href="{% url 'edit_post' %}?id={{ post.id }}"><button type="button" class="btn btn-warning btn-sm">
+                            <a href="{% url 'edit_post' %}?id={{ blog.id }}"><button type="button" class="btn btn-warning btn-sm">
                                 <span><i class="fas fa-pencil-alt"></i></span> Edit </button></a>
-                            <a href="{% url 'delete_post' %}?id={{ post.id }}"><button type="button" class="btn btn-danger btn-sm">
+                            <a href="{% url 'delete_post' %}?id={{ blog.id }}"><button type="button" class="btn btn-danger btn-sm">
                                 <span><i class="fas fa-times"></i></span> Delete </button></a>
                         {% endif %}
                     </div>

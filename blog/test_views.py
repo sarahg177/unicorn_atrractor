@@ -24,10 +24,19 @@ class TestBlogViews(TestCase):
         self.assertEqual(page.status_code, 200)
         self.assertTemplateUsed(page, "blogpost.html")
 
-    def test_create_new_post_page_view(self):
+    def test_get_create_new_post_page_view(self):
         """Tests the view for create a new post page renders correctly"""
         User.objects.create(username="Fred", password="bloggsbloggs")
         page = self.client.get("/blog/new_post")
+        self.assertEqual(page.status_code, 200)
+        self.assertTemplateUsed(page, "blogpostform.html")
+
+    def test_get_edit_post_page_view(self):
+        """Tests the view for edit a post page renders correctly"""
+        User.objects.create(username="Zebra", password="bloggsbloggs")
+        post = Post.objects.create(title='Create a test')
+        post.save()
+        page = self.client.get("/blog/edit_post/{0}".format(post.id))
         self.assertEqual(page.status_code, 200)
         self.assertTemplateUsed(page, "blogpostform.html")
 
