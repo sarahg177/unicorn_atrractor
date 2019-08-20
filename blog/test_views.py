@@ -33,10 +33,10 @@ class TestBlogViews(TestCase):
 
     def test_get_edit_post_page_view(self):
         """Tests the view for edit a post page renders correctly"""
-        User.objects.create(username="Zebra", password="bloggsbloggs")
-        post = Post.objects.create(title='Create a test')
+        user = User.objects.create(username="Zebra", password="bloggsbloggs")
+        post = Post.objects.create(title='Create a test', author=user)
         post.save()
-        page = self.client.get("/blog/edit_post/{0}".format(post.id))
+        page = self.client.get("/edit_post/{0}".format(post.id))
         self.assertEqual(page.status_code, 200)
         self.assertTemplateUsed(page, "blogpostform.html")
 
