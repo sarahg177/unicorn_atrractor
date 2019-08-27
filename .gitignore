@@ -6,3 +6,6 @@ env.py
 /products/
 /db.sqlite3
 /graphs/
+*.png
+static/
+
