@@ -48,7 +48,7 @@ The registration page consists of a form with 3 fields, username, password and p
 
 The login page consists of a form with 2 fields, username and password and a Login button.
 
-###Tickets Page
+### Tickets Page
 
 The tickets page consists a button to Create a new ticket. The page is empty until some tickets are added, once they have been added the page consists of a list of the current bugs and features. The lists consists of each ticket showing:
 
