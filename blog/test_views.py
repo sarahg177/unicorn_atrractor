@@ -47,13 +47,14 @@ class TestBlogViews(TestCase):
         Post.author = self.client.login(username="Fred", password="bloggsbloggs")
         response = self.client.post('/blog/new_post', {'title': 'a new blog', 'content': 'blog content'}, self.id())
         self.assertEqual(response.status_code, 200)
-        #self.assertRedirects(response, '/blog/', status_code=302)
 
     def test_delete_blog(self):
         User.objects.create(username="Fred", password="bloggsbloggs")
         Post.author = self.client.login(username="Fred", password="bloggsbloggs")
         post = Post.objects.create(title='Create a test', content='Test blog content', author_id='1')
-        post.delete()
+        post.save()
+        self.assertEqual(Post.objects.count(), 2)
         response = self.client.get("/blog/delete_blog?id={0}".format(post.id))
-
-        self.assertRedirects(response, '/blog/', status_code=302)
+        post.delete()
+        self.assertEqual(Post.objects.count(), 1)
+        self.assertEqual(response, '/blog/', status_code=200)
