@@ -43,12 +43,14 @@ class TestBlogViews(TestCase):
         post.save()
 
     def test_post_create_new_a_post_in_blog(self):
+        """Tests post of a new blog"""
         User.objects.create(username="Fred", password="bloggsbloggs")
         Post.author = self.client.login(username="Fred", password="bloggsbloggs")
         response = self.client.post('/blog/new_post', {'title': 'a new blog', 'content': 'blog content'}, self.id())
         self.assertEqual(response.status_code, 200)
 
     def test_delete_blog(self):
+        """Tests that a blog can be deleted"""
         User.objects.create(username="Fred", password="bloggsbloggs")
         Post.author = self.client.login(username="Fred", password="bloggsbloggs")
         post = Post.objects.create(title='Create a test', content='Test blog content', author_id='1')

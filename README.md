@@ -117,6 +117,7 @@ For this project the following technologies were used:
 
 ### TestCase
 
+I have including TestCases to test the code.
 
 ### Travis
 
@@ -125,7 +126,7 @@ I have included Travis testing for continuous intergration testing.
 ### Manual Testing
 
 For testing this application use login details: 
-* Username: test
+* Username: tester
 * Password: testing1234
 
 Testing for this project has been done with several browsers and devices.
